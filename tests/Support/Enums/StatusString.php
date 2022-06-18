@@ -44,5 +44,4 @@ enum StatusString: string
             self::NO_RESPONSE => 'news N',
         };
     }
-
 }

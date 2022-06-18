@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Datomatic\LaravelEnumHelper;
 
-use Datomatic\EnumHelper\Traits\EnumProperties;
 use Datomatic\EnumHelper\EnumHelper;
 use Datomatic\EnumHelper\Exceptions\UndefinedCase;
+use Datomatic\EnumHelper\Traits\EnumProperties;
 use Datomatic\LaravelEnumHelper\Exceptions\TranslationMissing;
 use Illuminate\Support\Str;
 
@@ -62,7 +62,7 @@ trait LaravelEnum
     private static function getSingularIfEndsWith(string $method, string $string): ?string
     {
         if (Str::of($method)->endsWith($string)) {
-            return Str::singular(Str::of($method)->replaceLast($string,''));
+            return Str::singular(Str::of($method)->replaceLast($string, ''));
         }
 
         return null;

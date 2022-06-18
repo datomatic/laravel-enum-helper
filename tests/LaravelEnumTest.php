@@ -7,7 +7,6 @@ use Datomatic\LaravelEnumHelper\Tests\Support\Enums\Status;
 use Datomatic\LaravelEnumHelper\Tests\Support\Enums\StatusString;
 use Datomatic\LaravelEnumHelper\Tests\TestCase;
 
-
 uses(TestCase::class);
 
 it('can has correct translation text', function ($enum, $result) {
@@ -101,7 +100,6 @@ it('can return an array of translations with method name both singular and plura
 //    'enum with method with cases param' => [StatusString::class, [StatusString::DISCARDED, StatusString::ACCEPTED], null],
 //    'enum with method with lang and cases param' => [StatusString::class, [StatusString::NO_RESPONSE, StatusString::ACCEPTED], 'it'],
 //]);
-
 
 it('can return an array of translations with magic method', function ($enumClass, $cases, $lang, $result) {
     expect($enumClass::excerpts($cases, $lang))->toBe($result);
@@ -227,7 +225,6 @@ it('can return an associative array of translations [value => translations] with
     ]],
 ]);
 
-
 it('can return an associative array of magic translations [value => translations] with method name both singular and plural', function ($enumClass, $cases, $lang, $result) {
     expect($enumClass::newsByName($cases, $lang))->toBe($result);
 })->with([
@@ -235,13 +232,13 @@ it('can return an associative array of magic translations [value => translations
         'PENDING' => 'news PENDING',
         'ACCEPTED' => 'news ACCEPTED',
         'DISCARDED' => 'news DISCARDED',
-        'NO_RESPONSE' => 'news NO_RESPONSE'
+        'NO_RESPONSE' => 'news NO_RESPONSE',
     ]],
     'translations with cases param' => [Status::class, [Status::ACCEPTED, Status::DISCARDED], null,
-        ['ACCEPTED' => 'news ACCEPTED', 'DISCARDED' => 'news DISCARDED']
+        ['ACCEPTED' => 'news ACCEPTED', 'DISCARDED' => 'news DISCARDED'],
     ],
     'translations with lang and cases param' => [Status::class, [Status::ACCEPTED, Status::NO_RESPONSE], 'it',
-        ['ACCEPTED' => 'ITA news ACCEPTED', 'NO_RESPONSE' => 'ITA news NO_RESPONSE']
+        ['ACCEPTED' => 'ITA news ACCEPTED', 'NO_RESPONSE' => 'ITA news NO_RESPONSE'],
     ],
 ]);
 
@@ -320,7 +317,7 @@ it('can return an associative array [value/name => translation]', function ($cla
         [StatusString::DISCARDED, StatusString::ACCEPTED], 'it', [
             'D' => 'Rifiutato',
             'A' => 'Accettato',
-        ],],
+        ], ],
 ]);
 
 it('can return an associative array of magic translations [value/name => translations] with method name both singular and plural', function ($enumClass, $cases, $lang, $result) {
@@ -330,17 +327,16 @@ it('can return an associative array of magic translations [value/name => transla
         'PENDING' => 'news PENDING',
         'ACCEPTED' => 'news ACCEPTED',
         'DISCARDED' => 'news DISCARDED',
-        'NO_RESPONSE' => 'news NO_RESPONSE'
+        'NO_RESPONSE' => 'news NO_RESPONSE',
     ]],
     'translations with cases param' => [Status::class, [Status::ACCEPTED, Status::DISCARDED], null,
-        ['ACCEPTED' => 'news ACCEPTED', 'DISCARDED' => 'news DISCARDED']
+        ['ACCEPTED' => 'news ACCEPTED', 'DISCARDED' => 'news DISCARDED'],
     ],
     'translations with lang and cases param' => [Status::class, [Status::ACCEPTED, Status::NO_RESPONSE], 'it',
-        ['ACCEPTED' => 'ITA news ACCEPTED', 'NO_RESPONSE' => 'ITA news NO_RESPONSE']
+        ['ACCEPTED' => 'ITA news ACCEPTED', 'NO_RESPONSE' => 'ITA news NO_RESPONSE'],
     ],
 ]);
 
 it('throw an TranslationMissing exception', function () {
     Status::notExistes();
 })->throws(TranslationMissing::class);
-
