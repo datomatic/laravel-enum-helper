@@ -31,7 +31,7 @@ trait LaravelEnum
         return $translation;
     }
 
-    protected static function translateUniquePath(string $method)
+    protected static function translateUniquePath(string $method): string
     {
         return 'enums.' . static::class . '.' . $method;
     }
@@ -40,7 +40,7 @@ trait LaravelEnum
     {
         try {
             return self::callStatic($method, $parameters);
-        } catch (UndefinedCase $e) {
+        } catch (UndefinedCase) {
         }
 
         $results = [];
