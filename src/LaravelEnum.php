@@ -36,7 +36,7 @@ trait LaravelEnum
         return 'enums.' . static::class . '.' . $method;
     }
 
-    public static function __callStatic(string $method, array $parameters): string|array
+    public static function __callStatic(string $method, array $parameters): int|string|array
     {
         try {
             return self::callStatic($method, $parameters);
