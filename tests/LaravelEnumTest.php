@@ -11,7 +11,6 @@ use Datomatic\LaravelEnumHelper\Tests\TestCase;
 
 uses(TestCase::class);
 
-
 it('can be used as a static method to get value', function ($enumClass, $enumMethod, $result) {
     expect($enumClass::$enumMethod())->toBe($result);
 })->with([
