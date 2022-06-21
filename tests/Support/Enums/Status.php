@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Datomatic\LaravelEnumHelper\Tests\Support\Enums;
 
-use Datomatic\LaravelEnumHelper\LaravelEnum;
+use Datomatic\LaravelEnumHelper\LaravelEnumHelper;
 
 /**
  * @method static string pending()
@@ -14,7 +14,7 @@ use Datomatic\LaravelEnumHelper\LaravelEnum;
  */
 enum Status
 {
-    use LaravelEnum;
+    use LaravelEnumHelper;
 
     case PENDING;
 

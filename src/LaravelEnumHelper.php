@@ -10,7 +10,7 @@ use Datomatic\EnumHelper\Traits\EnumProperties;
 use Datomatic\LaravelEnumHelper\Exceptions\TranslationMissing;
 use Illuminate\Support\Str;
 
-trait LaravelEnum
+trait LaravelEnumHelper
 {
     use EnumProperties;
     use EnumHelper {

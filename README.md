@@ -7,7 +7,7 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/datomatic/laravel-enum-helper.svg?style=for-the-badge)](https://packagist.org/packages/datomatic/laravel-enum-helper)
 
 This is an extension of the [datomatic/enum-helper](https://github.com/datomatic/enum-helper) package based on Laravel Framework.
-The package consists on a `LaravelEnum` trait that extends `EnumHelper` (`EnumInvokable`, `EnumFroms`, `EnumNames`,
+The package consists on a `LaravelEnumHelper` trait that extends `EnumHelper` (`EnumInvokable`, `EnumFroms`, `EnumNames`,
 `EnumValues`, `EnumEquality`) and add dynamic methods to return a translation or "property" method and
 relative helper methods.
 
@@ -48,15 +48,15 @@ composer require datomatic/laravel-enum-helper
 
 ## Usage
 
-You can use this functionality simply using the `LaravelEnum` trait.
+You can use this functionality simply using the `LaravelEnumHelper` trait.
 
 ```php
-use Datomatic\LaravelEnumHelper\LaravelEnum;
+use Datomatic\LaravelEnumHelper\LaravelEnumHelper;
 
 // Pure enum 
 enum Status
 {
-    use LaravelEnum;
+    use LaravelEnumHelper;
 
     case PENDING;
     case ACCEPTED;
@@ -77,7 +77,7 @@ enum Status
 // BackedEnum
 enum StatusString
 {   
-    use LaravelEnum;
+    use LaravelEnumHelper;
 
     case PENDING = 'P';
     case ACCEPTED = 'A';
@@ -228,6 +228,6 @@ Status::descriptionsAsSelect([Status::DISCARDED, Status::NO_RESPONSE], 'it'); //
 
 ## Laravel Nova Enum Field
 If you are using [Laravel Nova](https://nova.laravel.com/) Administrator Panel you can use a package to support the `enum-helper` or/and `laravel-enum-helper`.  
-This package adds the PHP 8.1 `enum`, `EnumDescription` and `LaravelEnum` traits support to Nova, with a Nova Select and Nova Boolean filters ready out of the box.
+This package adds the PHP 8.1 `enum`, `EnumDescription` and `LaravelEnumHelper` traits support to Nova, with a Nova Select and Nova Boolean filters ready out of the box.
 
 Package: [datomatic/nova-enum-field](https://github.com/datomatic/nova-enum-field)
