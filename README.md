@@ -19,7 +19,7 @@ So you can define a custom method and have these functions available: `[method]s
 For example, you can define a `color()` method and obtain automatically `colors()`, `colorsByName()`, `colorsByValue()`,
 `colorsAsSelect()` methods.
 
-The cool thing is you can also avoid writing the method and write the translations.
+The cool thing is you can also avoid writing the method and write only the translations.
 For example, you can define the property `excerpt` by writing the translations on enum.php (see below for explanation)
 and obtain `excerpt()`, `excerpts()`, `excerptsByName()`, `excerptsByValue()`, `excerptsAsSelect()` methods.
 
