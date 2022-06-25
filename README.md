@@ -17,11 +17,11 @@ So you can define a custom method and have these functions available: `[method]s
 `[method]sByValue()`, `[method]sAsSelect()`. For example with `color()` you obtain `colors()`, `colorsByName()`, `colorsByValue()`,
 `colorsAsSelect()` methods.
 
-The cool thing is you can also avoid writing the method and write the translations.
+The cool thing is you can also avoid writing the method and write only the translations.
 For example, you can define the property `excerpt` by writing the translations on enums.php [(see below for explanation)](#translations)
 and obtain `excerpt()`, `excerpts()`, `excerptsByName()`, `excerptsByValue()`, `excerptsAsSelect()` methods.
 
-The package use the [Laravel `Pluralizer` component](https://laravel.com/docs/localization#pluralization-language) to get the singular method to call or the property to translate.
+The package use the [Laravel `Pluralizer` component](https://laravel.com/docs/localization#pluralization-language) to get the singular method to call or to translate.
 
 If you are using [Laravel Nova](https://nova.laravel.com/) you can see the [Laravel Nova Enum Field](#laravel-nova-enum-field)
 

@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-enum-helper` will be documented in this file.
 
+## v0.3.0 - 2022-06-21
+
+- rename `LaravelEnum` trait in `LaravelEnumHelper`
+
 ## v0.2.1 - 2022-06-20
 
 - fixed return of invokable static call on IntBackedEnum
