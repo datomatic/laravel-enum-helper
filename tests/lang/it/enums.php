@@ -7,12 +7,11 @@ use Datomatic\LaravelEnumHelper\Tests\Support\Enums\StatusString;
 
 return [
     Status::class => [
-        'description' => [
-            'PENDING' => 'In attesa',
-            'ACCEPTED' => 'Accettato',
-            'DISCARDED' => 'Rifiutato',
-            'NO_RESPONSE' => 'Nessuna Risposta',
-        ],
+        'PENDING' => 'In attesa',
+        'ACCEPTED' => 'Accettato',
+        'DISCARDED' => 'Rifiutato',
+        'NO_RESPONSE' => 'Nessuna Risposta',
+
         'excerpt' => [
             'PENDING' => 'ITA asdkj dskjdsa dkjsa ksjd sadask',
             'ACCEPTED' => 'ITA ls klsa dlksa dlksa salk salk',
@@ -28,16 +27,16 @@ return [
     ],
     StatusString::class => [
         'description' => [
-            'PENDING' => 'In attesa',
-            'ACCEPTED' => 'Accettato',
-            'DISCARDED' => 'Rifiutato',
-            'NO_RESPONSE' => 'Nessuna Risposta',
+            'P' => 'In attesa',
+            'A' => 'Accettato',
+            'D' => 'Rifiutato',
+            'N' => 'Nessuna Risposta',
         ],
         'excerpt' => [
-            'PENDING' => 'ITA asdkj dskjdsa dkjsa ksjd sadask',
-            'ACCEPTED' => 'ITA ls klsa dlksa dlksa salk salk',
-            'DISCARDED' => 'ITA ksalsa ld djks jjdk skjd j',
-            'NO_RESPONSE' => 'ITA as dklasd asldldlasd',
+            'P' => 'ITA asdkj dskjdsa dkjsa ksjd sadask',
+            'A' => 'ITA ls klsa dlksa dlksa salk salk',
+            'D' => 'ITA ksalsa ld djks jjdk skjd j',
+            'N' => 'ITA as dklasd asldldlasd',
         ],
     ],
 ];

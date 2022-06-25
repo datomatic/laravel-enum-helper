@@ -3,16 +3,16 @@
 declare(strict_types=1);
 
 use Datomatic\LaravelEnumHelper\Tests\Support\Enums\Status;
+use Datomatic\LaravelEnumHelper\Tests\Support\Enums\StatusPascalCase;
 use Datomatic\LaravelEnumHelper\Tests\Support\Enums\StatusString;
 
 return [
     Status::class => [
-        'description' => [
-            'PENDING' => 'Await decision',
-            'ACCEPTED' => 'Recognized valid',
-            'DISCARDED' => 'No longer useful',
-            'NO_RESPONSE' => 'No response',
-        ],
+        'PENDING' => 'Await decision',
+        'ACCEPTED' => 'Recognized valid',
+        'DISCARDED' => 'No longer useful',
+        'NO_RESPONSE' => 'No response',
+
         'excerpt' => [
             'PENDING' => 'asdkj dskjdsa dkjsa ksjd sadask',
             'ACCEPTED' => 'ls klsa dlksa dlksa salk salk',
@@ -38,18 +38,26 @@ return [
             'NO_RESPONSE' => 'news NO_RESPONSE',
         ],
     ],
+    StatusPascalCase::class => [
+        'description' => [
+            StatusPascalCase::Pending() => 'Await decision',
+            StatusPascalCase::Accepted() => 'Recognized valid',
+            StatusPascalCase::Discarded() => 'No longer useful',
+            StatusPascalCase::NoResponse() => 'No response',
+        ],
+    ],
     StatusString::class => [
         'description' => [
-            StatusString::PENDING->name => 'Await decision',
-            StatusString::ACCEPTED->name => 'Recognized valid',
-            StatusString::DISCARDED->name => 'No longer useful',
-            StatusString::NO_RESPONSE->name => 'No response',
+            StatusString::PENDING() => 'Await decision',
+            StatusString::ACCEPTED() => 'Recognized valid',
+            StatusString::DISCARDED() => 'No longer useful',
+            StatusString::NO_RESPONSE() => 'No response',
         ],
         'excerpt' => [
-            'PENDING' => 'asdkj dskjdsa dkjsa ksjd sadask',
-            'ACCEPTED' => 'ls klsa dlksa dlksa salk salk',
-            'DISCARDED' => 'ksalsa ld djks jjdk skjd j',
-            'NO_RESPONSE' => 'as dklasd asldldlasd',
+            StatusString::PENDING() => 'asdkj dskjdsa dkjsa ksjd sadask',
+            StatusString::ACCEPTED() => 'ls klsa dlksa dlksa salk salk',
+            StatusString::DISCARDED() => 'ksalsa ld djks jjdk skjd j',
+            StatusString::NO_RESPONSE() => 'as dklasd asldldlasd',
         ],
     ],
 ];

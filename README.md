@@ -1,7 +1,7 @@
 ![Enum Helper-Dark](branding/laravel-dark.png#gh-dark-mode-only)![Enum Helper-Light](branding/laravel-light.png#gh-light-mode-only)
 # Laravel Enum Helper
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/datomatic/laravel-enum-helper.svg?style=for-the-badge)](https://packagist.org/packages/datomatic/laravel-enum-helper)
-[![Pest Tests number](https://img.shields.io/static/v1?label=%23tests&message=80&color=FF88FA&style=for-the-badge&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAABiVBMVEUAAAD/iPv9yP3Xm+j/mP//wfVj67Je6bP/h/pVx6p6175d57WQycf+iPn/iPrsnezArd3+t/qpvNJd6LP/jPpu6rv/lPr/kPpc57T/rvtc57Np6rj3oPl37cL/tfn/wv9d6brX//L/g/rYn+n/gvrWm+di6LX+jPrskfGWzMpt6bln4bdd57Jk6LWSycj+vPquwNVo6rde6bP7nvvYnup91b/+vfv/lvtc57OqvNTFs9//t/td57L9t/r/iPpd6LPapej/ovp26bxy67v9lfld6LJr4Ljwsvb/xv3/jv39zv1t6buG5cTDreH5ivlc5rJy676V4cxb57D/y/h50MOy4OCUxcVa77X/iPpe6LP/jP+pu9L8t///tvuQycfArNxp6LzArd151r7/i/9n4bb/j/9e6rT/ifr7ifrskvLYnuhi87tg8blg7bf/vv//lP+wxNtj9b3/qv//oP/+ivz/l/r8ifryn/fvlPTfpPDeofDKtujHtOWX1NF/4seC3cR82sFu7cBo5LiMwPMrAAAAWHRSTlMA/Wv8FAIC/dME/Wj+3tEG/Pv798G1oHRjS0k1LBsWDgsJ/v36+fTy8ezn4+Lh29XNzMzLysLAwLSwr66opJqakY+Ni4J7end0bGlpY11XU048KicmIR8fizl+vwAAAVdJREFUKM9tz2VXAlEQgOFBBURpkE67u7u7E1YFYQl1SbvrlztDiLvss+fc/fCemXMvAEhhKqU759P1rLoxUDUyEh9fPH0z7ALiVrEY+SSNtxNS2upouYv7hOL191aKVsZHUTgbnQPQgDkq4ctHdoQmTWmW4WFzlVUDVpNKXf2fWpWbZIwUq/hcmjWGYnSa1pZZjEoomrEdVAisD7CX6GEb40rqTODxCj21OjDOvjRV8l2jhudBDchg/FUbDIZCITzwQyH6a9+2AMDbm9GfltFnxgAdtQWUgQJl4VQq37uPcSnsfYZzav6Ew18fQ4fUYPM7Qn4uSiIdyx5saJ6T+/3+5KSltshicwI2UpfAKE/aoARTvnn7KMYMdlAUyWRSyHN2JeU42HlCi4TszTHcmuj3iMVdP5JzoyAWNzi6T3ZGrMFCliK3BAqRSC/B2+6IxvYYNcO+2Npfv+yFi10LfBUAAAAASUVORK5CYII=)](https://github.com/datomatic/laravel-enum-helper/tree/main/tests)
+[![Pest Tests number](https://img.shields.io/static/v1?label=%23tests&message=90&color=FF88FA&style=for-the-badge&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAABiVBMVEUAAAD/iPv9yP3Xm+j/mP//wfVj67Je6bP/h/pVx6p6175d57WQycf+iPn/iPrsnezArd3+t/qpvNJd6LP/jPpu6rv/lPr/kPpc57T/rvtc57Np6rj3oPl37cL/tfn/wv9d6brX//L/g/rYn+n/gvrWm+di6LX+jPrskfGWzMpt6bln4bdd57Jk6LWSycj+vPquwNVo6rde6bP7nvvYnup91b/+vfv/lvtc57OqvNTFs9//t/td57L9t/r/iPpd6LPapej/ovp26bxy67v9lfld6LJr4Ljwsvb/xv3/jv39zv1t6buG5cTDreH5ivlc5rJy676V4cxb57D/y/h50MOy4OCUxcVa77X/iPpe6LP/jP+pu9L8t///tvuQycfArNxp6LzArd151r7/i/9n4bb/j/9e6rT/ifr7ifrskvLYnuhi87tg8blg7bf/vv//lP+wxNtj9b3/qv//oP/+ivz/l/r8ifryn/fvlPTfpPDeofDKtujHtOWX1NF/4seC3cR82sFu7cBo5LiMwPMrAAAAWHRSTlMA/Wv8FAIC/dME/Wj+3tEG/Pv798G1oHRjS0k1LBsWDgsJ/v36+fTy8ezn4+Lh29XNzMzLysLAwLSwr66opJqakY+Ni4J7end0bGlpY11XU048KicmIR8fizl+vwAAAVdJREFUKM9tz2VXAlEQgOFBBURpkE67u7u7E1YFYQl1SbvrlztDiLvss+fc/fCemXMvAEhhKqU759P1rLoxUDUyEh9fPH0z7ALiVrEY+SSNtxNS2upouYv7hOL191aKVsZHUTgbnQPQgDkq4ctHdoQmTWmW4WFzlVUDVpNKXf2fWpWbZIwUq/hcmjWGYnSa1pZZjEoomrEdVAisD7CX6GEb40rqTODxCj21OjDOvjRV8l2jhudBDchg/FUbDIZCITzwQyH6a9+2AMDbm9GfltFnxgAdtQWUgQJl4VQq37uPcSnsfYZzav6Ew18fQ4fUYPM7Qn4uSiIdyx5saJ6T+/3+5KSltshicwI2UpfAKE/aoARTvnn7KMYMdlAUyWRSyHN2JeU42HlCi4TszTHcmuj3iMVdP5JzoyAWNzi6T3ZGrMFCliK3BAqRSC/B2+6IxvYYNcO+2Npfv+yFi10LfBUAAAAASUVORK5CYII=)](https://github.com/datomatic/laravel-enum-helper/tree/main/tests)
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/datomatic/laravel-enum-helper/run-tests?label=tests&color=5FE8B3&style=for-the-badge&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAABiVBMVEUAAAD/iPv9yP3Xm+j/mP//wfVj67Je6bP/h/pVx6p6175d57WQycf+iPn/iPrsnezArd3+t/qpvNJd6LP/jPpu6rv/lPr/kPpc57T/rvtc57Np6rj3oPl37cL/tfn/wv9d6brX//L/g/rYn+n/gvrWm+di6LX+jPrskfGWzMpt6bln4bdd57Jk6LWSycj+vPquwNVo6rde6bP7nvvYnup91b/+vfv/lvtc57OqvNTFs9//t/td57L9t/r/iPpd6LPapej/ovp26bxy67v9lfld6LJr4Ljwsvb/xv3/jv39zv1t6buG5cTDreH5ivlc5rJy676V4cxb57D/y/h50MOy4OCUxcVa77X/iPpe6LP/jP+pu9L8t///tvuQycfArNxp6LzArd151r7/i/9n4bb/j/9e6rT/ifr7ifrskvLYnuhi87tg8blg7bf/vv//lP+wxNtj9b3/qv//oP/+ivz/l/r8ifryn/fvlPTfpPDeofDKtujHtOWX1NF/4seC3cR82sFu7cBo5LiMwPMrAAAAWHRSTlMA/Wv8FAIC/dME/Wj+3tEG/Pv798G1oHRjS0k1LBsWDgsJ/v36+fTy8ezn4+Lh29XNzMzLysLAwLSwr66opJqakY+Ni4J7end0bGlpY11XU048KicmIR8fizl+vwAAAVdJREFUKM9tz2VXAlEQgOFBBURpkE67u7u7E1YFYQl1SbvrlztDiLvss+fc/fCemXMvAEhhKqU759P1rLoxUDUyEh9fPH0z7ALiVrEY+SSNtxNS2upouYv7hOL191aKVsZHUTgbnQPQgDkq4ctHdoQmTWmW4WFzlVUDVpNKXf2fWpWbZIwUq/hcmjWGYnSa1pZZjEoomrEdVAisD7CX6GEb40rqTODxCj21OjDOvjRV8l2jhudBDchg/FUbDIZCITzwQyH6a9+2AMDbm9GfltFnxgAdtQWUgQJl4VQq37uPcSnsfYZzav6Ew18fQ4fUYPM7Qn4uSiIdyx5saJ6T+/3+5KSltshicwI2UpfAKE/aoARTvnn7KMYMdlAUyWRSyHN2JeU42HlCi4TszTHcmuj3iMVdP5JzoyAWNzi6T3ZGrMFCliK3BAqRSC/B2+6IxvYYNcO+2Npfv+yFi10LfBUAAAAASUVORK5CYII=)](https://github.com/datomatic/laravel-enum-helper/actions/workflows/run-tests.yml)
 [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/datomatic/laravel-enum-helper/Check%20&%20fix%20styling?label=code%20style&color=5FE8B3&style=for-the-badge)](https://github.com/datomatic/laravel-enum-helper/actions/workflows/php-cs-fixer.yml)
 [![Total Downloads](https://img.shields.io/packagist/dt/datomatic/laravel-enum-helper.svg?style=for-the-badge)](https://packagist.org/packages/datomatic/laravel-enum-helper)
@@ -14,16 +14,14 @@ relative helper methods.
 You can think about it as an [`EnumDescription` trait](https://github.com/datomatic/enum-helper#descriptions-and-translations) but completely dynamic.
 
 So you can define a custom method and have these functions available: `[method]s()`, `[method]sByName()`,
-`[method]sByValue()`, `[method]sAsSelect()`.
-
-For example, you can define a `color()` method and obtain automatically `colors()`, `colorsByName()`, `colorsByValue()`,
+`[method]sByValue()`, `[method]sAsSelect()`. For example with `color()` you obtain `colors()`, `colorsByName()`, `colorsByValue()`,
 `colorsAsSelect()` methods.
 
 The cool thing is you can also avoid writing the method and write the translations.
-For example, you can define the property `excerpt` by writing the translations on enum.php (see below for explanation)
+For example, you can define the property `excerpt` by writing the translations on enums.php [(see below for explanation)](#translations)
 and obtain `excerpt()`, `excerpts()`, `excerptsByName()`, `excerptsByValue()`, `excerptsAsSelect()` methods.
 
-The package use the [Laravel `Pluralizer` component](https://laravel.com/docs/localization#pluralization-language) to get the singular method to call or to translate.
+The package use the [Laravel `Pluralizer` component](https://laravel.com/docs/localization#pluralization-language) to get the singular method to call or the property to translate.
 
 If you are using [Laravel Nova](https://nova.laravel.com/) you can see the [Laravel Nova Enum Field](#laravel-nova-enum-field)
 
@@ -105,24 +103,35 @@ Language strings may be stored in `enums.php` files within the `lang` directory.
     /it
         enums.php
 ```
-All language files return an array of keyed strings. The array has 2 levels: the first level has as a key the complete class name of the enum, and the second has as a key the name of the enum case.
+All language files return an array of keyed strings.
+The array has 3 levels: 
+- first level key: the complete class name of the enum
+- second level key: the name of the property to translate
+- third level key: the name/value of the enum case.
+
+The default property is `description` so if you use only that property you can use just a 2 level array.
+
 ```php
 // /lang/it/enums.php
 
 return [
+    // If you need to translate just the description property
     Status::class => [
-        'description' => [ // or property do you want to translate
-            'PENDING' => 'In attesa',
-            'ACCEPTED' => 'Accettato',
-            'DISCARDED' => 'Rifiutato',
-            'NO_RESPONSE' => 'Nessuna Risposta',
-        ]
+        Status::PENDING() => 'In attesa', // using invokable trait functionality
+        'ACCEPTED' => 'Accettato', // using the name of pure enum case
+        'DISCARDED' => 'Rifiutato',
+        'NO_RESPONSE' => 'Nessuna Risposta',
     ],
-     // or using the enum object name attribute
+     // If you need to translate multiple properties (e.g. description, excerpt)
     StatusString::class => [
-        'description' => [
-            StatusString::PENDING->name => 'In attesa',
-            StatusString::ACCEPTED->name => 'Accettato',
+        'description' => [ // using invokable trait functionality
+            StatusString::PENDING() => 'In attesa',
+            StatusString::ACCEPTED() => 'Accettato',
+            ...
+        ],
+        'excerpt' => [ // using the value of BackedEnum case
+            "P" => 'In attesa',
+            "A" => 'Accettato',
     ...
 ```
 
@@ -131,7 +140,7 @@ Language strings are stored as JSON files in the lang directory (e.g. `lang/it.j
 In this example the `description` property is translated:
 ```json
 {
-  "enums.Namespace\\StatusString.description.PENDING": "In attesa",
+  "enums.Namespace\\StatusString.description.P": "In attesa",
   "...":"..."
 }
 ```

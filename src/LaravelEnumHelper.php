@@ -22,18 +22,35 @@ trait LaravelEnumHelper
      */
     public function __call(string $method, array $parameters): string
     {
-        $translation = __(self::translateUniquePath($method) . '.' . $this->name, [], $parameters[0] ?? null);
+        $translateUniquePath = self::translateUniquePath($method, $this());
 
-        if (Str::of($translation)->startsWith(self::translateUniquePath($method))) {
+        $translation = __($translateUniquePath, [], $parameters[0] ?? null);
+
+        if ($method === 'description'
+            && Str::of($translation)->startsWith($translateUniquePath)) {
+            $translation = __(self::translateUniqueFallbackPath($this()), [], $parameters[0] ?? null);
+        }
+
+        if (Str::of($translation)->startsWith(self::translateBaseUniquePath())) {
             throw new TranslationMissing(self::class, $method);
         }
 
         return $translation;
     }
 
-    protected static function translateUniquePath(string $method): string
+    protected static function translateBaseUniquePath(): string
     {
-        return 'enums.' . static::class . '.' . $method;
+        return 'enums.' . static::class;
+    }
+
+    protected static function translateUniquePath(string $method, string $value): string
+    {
+        return self::translateBaseUniquePath() . '.' . $method . '.' . $value;
+    }
+
+    protected static function translateUniqueFallbackPath(string $value): string
+    {
+        return self::translateBaseUniquePath() . '.' . $value;
     }
 
     public static function __callStatic(string $method, array $parameters): int|string|array

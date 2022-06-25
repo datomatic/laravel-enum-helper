@@ -7,9 +7,6 @@ use Datomatic\LaravelEnumHelper\Tests\Support\Enums\Status;
 use Datomatic\LaravelEnumHelper\Tests\Support\Enums\StatusInt;
 use Datomatic\LaravelEnumHelper\Tests\Support\Enums\StatusPascalCase;
 use Datomatic\LaravelEnumHelper\Tests\Support\Enums\StatusString;
-use Datomatic\LaravelEnumHelper\Tests\TestCase;
-
-uses(TestCase::class);
 
 it('can be used as a static method to get value', function ($enumClass, $enumMethod, $result) {
     expect($enumClass::$enumMethod())->toBe($result);
@@ -43,15 +40,21 @@ it('can be used as a static method to get value', function ($enumClass, $enumMet
 it('can has correct translation text', function ($enum, $result) {
     expect($enum->description())->toBe($result);
 })->with([
-    [Status::PENDING, 'Await decision'],
-    [Status::NO_RESPONSE, 'No response'],
+    'translation' => [StatusString::NO_RESPONSE, 'No response'],
+    'fallback translation' => [Status::PENDING, 'Await decision'],
+    'method definition' => [StatusInt::NO_RESPONSE, 'No response'],
 ]);
 
 it('has correct translation text passing lang', function ($enum, $lang, $result) {
     expect($enum->description($lang))->toBe($result);
 })->with([
-    'eng' => [Status::PENDING, 'en', 'Await decision'],
-    'ita' => [Status::PENDING, 'it', 'In attesa'],
+    'eng translation' => [StatusString::NO_RESPONSE, 'en', 'No response'],
+    'ita translation' => [StatusString::NO_RESPONSE, 'it', 'Nessuna Risposta'],
+    'ita fallback locale translation' => [StatusPascalCase::NoResponse, 'it', 'No response'],
+    'eng fallback translation' => [Status::PENDING, 'en', 'Await decision'],
+    'ita fallback translation' => [Status::PENDING, 'it', 'In attesa'],
+    'eng method' => [StatusInt::PENDING, 'en', 'Await decision'],
+    'ita method' => [StatusInt::PENDING, 'it', 'Await decision'],
 ]);
 
 it('can has correct translation with method name both singular and plural', function ($enum, $lang, $result) {
@@ -68,6 +71,13 @@ it('can return a translation with magic method', function ($enum, $result) {
 })->with([
     [Status::PENDING, 'asdkj dskjdsa dkjsa ksjd sadask'],
     [Status::NO_RESPONSE, 'as dklasd asldldlasd'],
+]);
+
+it(' throw an exception if try to call fallback with no descriprion property', function ($enum, $lang) {
+    expect(fn() => $enum->property($lang))->toThrow(TranslationMissing::class);
+})->with([
+    [Status::PENDING, 'en'],
+    [StatusPascalCase::NoResponse, 'it'],
 ]);
 
 it('can return a property with magic method', function ($enum, $result) {
@@ -369,5 +379,13 @@ it('can return an associative array of magic translations [value/name => transla
 ]);
 
 it('throw an TranslationMissing exception', function () {
-    Status::notExistes();
+    StatusString::NO_RESPONSE->notExist();
+})->throws(TranslationMissing::class);
+
+it('throw an TranslationMissing exception2', function () {
+    StatusString::notExists(null,'it');
+})->throws(TranslationMissing::class);
+
+it('throw an TranslationMissing exception3', function () {
+    Status::notExists(null);
 })->throws(TranslationMissing::class);
