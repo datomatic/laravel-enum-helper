@@ -74,7 +74,7 @@ it('can return a translation with magic method', function ($enum, $result) {
 ]);
 
 it(' throw an exception if try to call fallback with no descriprion property', function ($enum, $lang) {
-    expect(fn() => $enum->property($lang))->toThrow(TranslationMissing::class);
+    expect(fn () => $enum->property($lang))->toThrow(TranslationMissing::class);
 })->with([
     [Status::PENDING, 'en'],
     [StatusPascalCase::NoResponse, 'it'],
@@ -383,7 +383,7 @@ it('throw an TranslationMissing exception', function () {
 })->throws(TranslationMissing::class);
 
 it('throw an TranslationMissing exception2', function () {
-    StatusString::notExists(null,'it');
+    StatusString::notExists(null, 'it');
 })->throws(TranslationMissing::class);
 
 it('throw an TranslationMissing exception3', function () {
