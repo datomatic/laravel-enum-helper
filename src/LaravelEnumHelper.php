@@ -86,7 +86,7 @@ trait LaravelEnumHelper
         $subject = Str::of($method);
 
         if ($subject->endsWith($string)) {
-            return $subject->replaceLast($string, '')->singular()->toString();
+            return "{$subject->replaceLast($string, '')->singular()}";
         }
 
         return null;
