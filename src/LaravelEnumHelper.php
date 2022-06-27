@@ -43,12 +43,12 @@ trait LaravelEnumHelper
         return 'enums.' . static::class;
     }
 
-    protected static function translateUniquePath(string $method, string $value): string
+    protected static function translateUniquePath(string $method, string|int $value): string
     {
         return self::translateBaseUniquePath() . '.' . $method . '.' . $value;
     }
 
-    protected static function translateUniqueFallbackPath(string $value): string
+    protected static function translateUniqueFallbackPath(string|int $value): string
     {
         return self::translateBaseUniquePath() . '.' . $value;
     }
