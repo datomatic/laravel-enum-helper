@@ -24,13 +24,4 @@ enum StatusInt: int
 
     case NO_RESPONSE = 3;
 
-    public function description(?string $lang = null): string
-    {
-        return match ($this) {
-            self::PENDING => 'Await decision',
-            self::ACCEPTED => 'Recognized valid',
-            self::DISCARDED => 'No longer useful',
-            self::NO_RESPONSE => 'No response',
-        };
-    }
 }

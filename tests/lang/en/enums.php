@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Datomatic\LaravelEnumHelper\Tests\Support\Enums\Status;
+use Datomatic\LaravelEnumHelper\Tests\Support\Enums\StatusInt;
 use Datomatic\LaravelEnumHelper\Tests\Support\Enums\StatusPascalCase;
 use Datomatic\LaravelEnumHelper\Tests\Support\Enums\StatusString;
 
@@ -37,6 +38,12 @@ return [
             'DISCARDED' => 'news DISCARDED',
             'NO_RESPONSE' => 'news NO_RESPONSE',
         ],
+    ],
+    StatusInt::class => [
+        StatusInt::Pending() => 'Await decision',
+        StatusInt::Accepted() => 'Recognized valid',
+        StatusInt::Discarded() => 'No longer useful',
+        StatusInt::NoResponse() => 'No response',
     ],
     StatusPascalCase::class => [
         'description' => [

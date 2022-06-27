@@ -48,13 +48,15 @@ it('can has correct translation text', function ($enum, $result) {
 it('has correct translation text passing lang', function ($enum, $lang, $result) {
     expect($enum->description($lang))->toBe($result);
 })->with([
-    'eng translation' => [StatusString::NO_RESPONSE, 'en', 'No response'],
-    'ita translation' => [StatusString::NO_RESPONSE, 'it', 'Nessuna Risposta'],
+    'eng translation string backed enum' => [StatusString::NO_RESPONSE, 'en', 'No response'],
+    'ita translation string backed enum' => [StatusString::NO_RESPONSE, 'it', 'Nessuna Risposta'],
+    'eng translation int backed enum' => [StatusInt::PENDING, 'en', 'Await decision'],
+    'ita translation int backed enum' => [StatusInt::NO_RESPONSE, 'it', 'Nessuna Risposta'],
     'ita fallback locale translation' => [StatusPascalCase::NoResponse, 'it', 'No response'],
     'eng fallback translation' => [Status::PENDING, 'en', 'Await decision'],
     'ita fallback translation' => [Status::PENDING, 'it', 'In attesa'],
-    'eng method' => [StatusInt::PENDING, 'en', 'Await decision'],
-    'ita method' => [StatusInt::PENDING, 'it', 'Await decision'],
+    'eng method' => [StatusPascalCase::Pending, 'en', 'Await decision'],
+    'ita method' => [StatusPascalCase::Pending, 'it', 'Await decision'],
 ]);
 
 it('can has correct translation with method name both singular and plural', function ($enum, $lang, $result) {

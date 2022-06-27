@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Datomatic\LaravelEnumHelper\Tests\Support\Enums\Status;
+use Datomatic\LaravelEnumHelper\Tests\Support\Enums\StatusInt;
 use Datomatic\LaravelEnumHelper\Tests\Support\Enums\StatusString;
 
 return [
@@ -38,5 +39,11 @@ return [
             'D' => 'ITA ksalsa ld djks jjdk skjd j',
             'N' => 'ITA as dklasd asldldlasd',
         ],
+    ],
+    StatusInt::class => [
+        0 => 'In attesa',
+        1 => 'Accettato',
+        2 => 'Rifiutato',
+        3 => 'Nessuna Risposta',
     ],
 ];
