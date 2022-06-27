@@ -60,26 +60,33 @@ trait LaravelEnumHelper
         } catch (UndefinedCase) {
         }
 
-        $results = [];
         $args = [$parameters[0] ?? null, $parameters[1] ?? null];
 
         if ($singularMethod = self::getSingularIfEndsWith($method, 'ByName')) {
-            $results = static::dynamicByKey('name', $singularMethod, ...$args);
-        } elseif ($singularMethod = self::getSingularIfEndsWith($method, 'ByValue')) {
-            $results = static::dynamicByKey('value', $singularMethod, ...$args);
-        } elseif ($singularMethod = self::getSingularIfEndsWith($method, 'AsSelect')) {
-            $results = static::dynamicAsSelect($singularMethod, ...$args);
-        } elseif ($singularMethod = Str::singular($method)) {
-            $results = static::dynamicList($singularMethod, ...$args);
+            return static::dynamicByKey('name', $singularMethod, ...$args);
         }
 
-        return $results;
+        if ($singularMethod = self::getSingularIfEndsWith($method, 'ByValue')) {
+            return static::dynamicByKey('value', $singularMethod, ...$args);
+        }
+
+        if ($singularMethod = self::getSingularIfEndsWith($method, 'AsSelect')) {
+            return static::dynamicAsSelect($singularMethod, ...$args);
+        }
+
+        if ($singularMethod = Str::singular($method)) {
+            return static::dynamicList($singularMethod, ...$args);
+        }
+
+        return [];
     }
 
     private static function getSingularIfEndsWith(string $method, string $string): ?string
     {
-        if (Str::of($method)->endsWith($string)) {
-            return Str::singular(Str::of($method)->replaceLast($string, ''));
+        $subject = Str::of($method);
+
+        if ($subject->endsWith($string)) {
+            return "{$subject->replaceLast($string, '')->singular()}";
         }
 
         return null;
