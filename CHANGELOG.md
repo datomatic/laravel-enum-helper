@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-enum-helper` will be documented in this file.
 
+## v0.4.1 - 2022-06-27
+
+refactoring by @eppak
+
 ## v0.4.0 - 2022-06-25
 
 - changed the translation key from `name` to `name/value` for using the more comfortable invokable functionality on enums.php
@@ -31,6 +35,7 @@ return [
             "P" => 'In attesa',
             "A" => 'Accettato',
     ...
+
 
 ```
 ## v0.3.0 - 2022-06-21
