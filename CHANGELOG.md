@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-enum-helper` will be documented in this file.
 
+## v0.4.3 - 2022-06-30
+
+- improved the TranslationMissing exception message
+
 ## v0.4.2 - 2022-06-27
 
 - fixed error with `IntBackedEnum`
@@ -39,6 +43,7 @@ return [
             "P" => 'In attesa',
             "A" => 'Accettato',
     ...
+
 
 
 
