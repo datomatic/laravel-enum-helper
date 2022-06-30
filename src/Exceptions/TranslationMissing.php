@@ -8,8 +8,8 @@ use RuntimeException;
 
 class TranslationMissing extends RuntimeException
 {
-    public function __construct(string $enum, string $method)
+    public function __construct(\UnitEnum $enum, string $method)
     {
-        parent::__construct("Translation missing on $enum for $method property");
+        parent::__construct("Translation missing for '$method' property of ".get_class($enum)."::$enum->name");
     }
 }
