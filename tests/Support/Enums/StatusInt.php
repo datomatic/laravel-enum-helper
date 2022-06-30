@@ -23,5 +23,4 @@ enum StatusInt: int
     case DISCARDED = 2;
 
     case NO_RESPONSE = 3;
-
 }

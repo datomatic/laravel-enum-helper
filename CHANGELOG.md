@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-enum-helper` will be documented in this file.
 
+## v0.4.2 - 2022-06-27
+
+- fixed error with `IntBackedEnum`
+
 ## v0.4.1 - 2022-06-27
 
 refactoring by @eppak
@@ -35,6 +39,7 @@ return [
             "P" => 'In attesa',
             "A" => 'Accettato',
     ...
+
 
 
 ```
