@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-enum-helper` will be documented in this file.
 
+## v0.4.4 - 2022-06-30
+
+- added a fallback to the case name on `description` "property"
+
 ## v0.4.3 - 2022-06-30
 
 - improved the TranslationMissing exception message
@@ -43,6 +47,7 @@ return [
             "P" => 'In attesa',
             "A" => 'Accettato',
     ...
+
 
 
 
