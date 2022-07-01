@@ -33,7 +33,7 @@ trait LaravelEnumHelper
 
         if (Str::of($translation)->startsWith(self::translateBaseUniquePath())) {
             if($method === 'description'){
-                return Str::title(str_replace('_', ' ', $this->name));
+                return self::humanize($this->name);
             }
             throw new TranslationMissing($this, $method);
         }
@@ -54,6 +54,16 @@ trait LaravelEnumHelper
     protected static function translateUniqueFallbackPath(string|int $value): string
     {
         return self::translateBaseUniquePath() . '.' . $value;
+    }
+
+    protected static function humanize(string $string): string
+    {
+        return (string) Str::of($string)
+            ->whenTest('/^[A-Z][a-z]+(?:[A-Z][a-z]+)*$/m', function ($string) {
+                return $string->snake(' ')->title();
+            }, function ($string) {
+                return $string->replace('_',' ')->title();
+            });
     }
 
     public static function __callStatic(string $method, array $parameters): int|string|array

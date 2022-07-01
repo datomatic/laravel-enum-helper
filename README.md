@@ -161,7 +161,8 @@ public function description(?string $lang = null): string
 This dynamic method try to resolve `property()` method on the enum.  
 If the method not exist try to translate the instance value with the framework translation function 
 `__("enums.Namespace\EnumClass.property.CASE_NAME")`.  
-In case the translation not exist throw an `TranslationMissing` exception.
+Because the default property is `description`, if there isn't a translation to that property there is a fallback that takes the case name humanized.
+With the other properties, if the translation does not exist, the package throws a `TranslationMissing` exception.
 
 
 ## static `[property]s()` method

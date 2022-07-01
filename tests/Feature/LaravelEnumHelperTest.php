@@ -6,7 +6,9 @@ use Datomatic\LaravelEnumHelper\Exceptions\TranslationMissing;
 use Datomatic\LaravelEnumHelper\Tests\Support\Enums\Status;
 use Datomatic\LaravelEnumHelper\Tests\Support\Enums\StatusInt;
 use Datomatic\LaravelEnumHelper\Tests\Support\Enums\StatusPascalCase;
+use Datomatic\LaravelEnumHelper\Tests\Support\Enums\StatusPascalCaseWithoutTranslation;
 use Datomatic\LaravelEnumHelper\Tests\Support\Enums\StatusString;
+use Datomatic\LaravelEnumHelper\Tests\Support\Enums\StatusWithoutTranslations;
 
 it('can be used as a static method to get value', function ($enumClass, $enumMethod, $result) {
     expect($enumClass::$enumMethod())->toBe($result);
@@ -76,7 +78,7 @@ it('can return a translation with magic method', function ($enum, $result) {
 ]);
 
 it(' throw an exception if try to call fallback with no descriprion property', function ($enum, $lang) {
-    expect(fn () => $enum->property($lang))->toThrow(TranslationMissing::class);
+    expect(fn() => $enum->property($lang))->toThrow(TranslationMissing::class);
 })->with([
     [Status::PENDING, 'en'],
     [StatusPascalCase::NoResponse, 'it'],
@@ -360,7 +362,7 @@ it('can return an associative array [value/name => translation]', function ($cla
         [StatusString::DISCARDED, StatusString::ACCEPTED], 'it', [
             'D' => 'Rifiutato',
             'A' => 'Accettato',
-        ], ],
+        ],],
 ]);
 
 it('can return an associative array of magic translations [value/name => translations] with method name both singular and plural', function ($enumClass, $cases, $lang, $result) {
@@ -381,13 +383,30 @@ it('can return an associative array of magic translations [value/name => transla
 ]);
 
 it('throw an TranslationMissing exception', function () {
-    StatusString::NO_RESPONSE->notExist();
-})->throws(TranslationMissing::class);
+    expect(fn() => StatusString::NO_RESPONSE->notExist())->toThrow(TranslationMissing::class);
+    expect(fn() => StatusString::notExists(null, 'it'))->toThrow(TranslationMissing::class);
+    expect(fn() => Status::notExists(null))->toThrow(TranslationMissing::class);
+});
 
-it('throw an TranslationMissing exception2', function () {
-    StatusString::notExists(null, 'it');
-})->throws(TranslationMissing::class);
+it('use a fallback case name if a description translation missing without exception', function () {
+    expect(StatusPascalCaseWithoutTranslation::NoResponse->description())->toBe(
+        'No Response' // NoResponse humanized
+    )->not->toThrow(TranslationMissing::class);
 
-it('throw an TranslationMissing exception3', function () {
-    Status::notExists(null);
-})->throws(TranslationMissing::class);
+    expect(StatusPascalCaseWithoutTranslation::descriptions())->toBe([
+        'Await decision',
+        'Recognized valid',
+        'No longer useful',
+        'No Response' // NoResponse humanized
+    ])->not->toThrow(TranslationMissing::class);
+});
+
+
+it('use all fallbacks case names for description method if all translations missing without exception', function () {
+    expect(StatusWithoutTranslations::descriptions())->toBe([
+        'Pending', // PENDING humanized
+        'Accepted', // ACCEPTED humanized
+        'Discarded', // DISCARDED humanized
+        'No Response' // NO_RESPONSE humanized
+    ])->not->toThrow(TranslationMissing::class);
+});

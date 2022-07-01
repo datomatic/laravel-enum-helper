@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Datomatic\LaravelEnumHelper\Tests\Support\Enums\Status;
 use Datomatic\LaravelEnumHelper\Tests\Support\Enums\StatusInt;
 use Datomatic\LaravelEnumHelper\Tests\Support\Enums\StatusPascalCase;
+use Datomatic\LaravelEnumHelper\Tests\Support\Enums\StatusPascalCaseWithoutTranslation;
 use Datomatic\LaravelEnumHelper\Tests\Support\Enums\StatusString;
 
 return [
@@ -45,12 +46,11 @@ return [
         StatusInt::Discarded() => 'No longer useful',
         StatusInt::NoResponse() => 'No response',
     ],
-    StatusPascalCase::class => [
+    StatusPascalCaseWithoutTranslation::class => [
         'description' => [
-            StatusPascalCase::Pending() => 'Await decision',
-            StatusPascalCase::Accepted() => 'Recognized valid',
-            StatusPascalCase::Discarded() => 'No longer useful',
-            StatusPascalCase::NoResponse() => 'No response',
+            StatusPascalCaseWithoutTranslation::Pending() => 'Await decision',
+            StatusPascalCaseWithoutTranslation::Accepted() => 'Recognized valid',
+            StatusPascalCaseWithoutTranslation::Discarded() => 'No longer useful',
         ],
     ],
     StatusString::class => [
