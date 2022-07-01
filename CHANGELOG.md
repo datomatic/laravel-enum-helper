@@ -2,6 +2,12 @@
 
 All notable changes to `laravel-enum-helper` will be documented in this file.
 
+## v0.4.5 - 2022-07-01
+
+- refactored `humanize` case string method
+- added test to cover all cases
+- refactored documentation
+
 ## v0.4.4 - 2022-06-30
 
 - added a fallback to the case name on `description` "property"
@@ -47,6 +53,7 @@ return [
             "P" => 'In attesa',
             "A" => 'Accettato',
     ...
+
 
 
 
