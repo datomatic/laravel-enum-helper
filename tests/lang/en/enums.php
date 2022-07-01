@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 use Datomatic\LaravelEnumHelper\Tests\Support\Enums\Status;
 use Datomatic\LaravelEnumHelper\Tests\Support\Enums\StatusInt;
-use Datomatic\LaravelEnumHelper\Tests\Support\Enums\StatusPascalCase;
 use Datomatic\LaravelEnumHelper\Tests\Support\Enums\StatusPascalCaseWithoutTranslation;
 use Datomatic\LaravelEnumHelper\Tests\Support\Enums\StatusString;
 

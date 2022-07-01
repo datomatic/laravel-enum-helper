@@ -32,7 +32,7 @@ trait LaravelEnumHelper
         }
 
         if (Str::of($translation)->startsWith(self::translateBaseUniquePath())) {
-            if($method === 'description') {
+            if ($method === 'description') {
                 return self::humanize($this->name);
             }
             throw new TranslationMissing($this, $method);
@@ -62,7 +62,7 @@ trait LaravelEnumHelper
             ->whenTest('/^[A-Z][a-z]+(?:[A-Z][a-z]+)*$/m', function ($string) {
                 return $string->snake(' ')->title();
             }, function ($string) {
-                return $string->replace('_',' ')->title();
+                return $string->replace('_', ' ')->title();
             });
     }
 

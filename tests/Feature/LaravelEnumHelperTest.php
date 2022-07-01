@@ -78,7 +78,7 @@ it('can return a translation with magic method', function ($enum, $result) {
 ]);
 
 it(' throw an exception if try to call fallback with no descriprion property', function ($enum, $lang) {
-    expect(fn() => $enum->property($lang))->toThrow(TranslationMissing::class);
+    expect(fn () => $enum->property($lang))->toThrow(TranslationMissing::class);
 })->with([
     [Status::PENDING, 'en'],
     [StatusPascalCase::NoResponse, 'it'],
@@ -362,7 +362,7 @@ it('can return an associative array [value/name => translation]', function ($cla
         [StatusString::DISCARDED, StatusString::ACCEPTED], 'it', [
             'D' => 'Rifiutato',
             'A' => 'Accettato',
-        ],],
+        ], ],
 ]);
 
 it('can return an associative array of magic translations [value/name => translations] with method name both singular and plural', function ($enumClass, $cases, $lang, $result) {
@@ -383,9 +383,9 @@ it('can return an associative array of magic translations [value/name => transla
 ]);
 
 it('throw an TranslationMissing exception', function () {
-    expect(fn() => StatusString::NO_RESPONSE->notExist())->toThrow(TranslationMissing::class);
-    expect(fn() => StatusString::notExists(null, 'it'))->toThrow(TranslationMissing::class);
-    expect(fn() => Status::notExists(null))->toThrow(TranslationMissing::class);
+    expect(fn () => StatusString::NO_RESPONSE->notExist())->toThrow(TranslationMissing::class);
+    expect(fn () => StatusString::notExists(null, 'it'))->toThrow(TranslationMissing::class);
+    expect(fn () => Status::notExists(null))->toThrow(TranslationMissing::class);
 });
 
 it('use a fallback case name if a description translation missing without exception', function () {
@@ -397,16 +397,15 @@ it('use a fallback case name if a description translation missing without except
         'Await decision',
         'Recognized valid',
         'No longer useful',
-        'No Response' // NoResponse humanized
+        'No Response', // NoResponse humanized
     ])->not->toThrow(TranslationMissing::class);
 });
-
 
 it('use all fallbacks case names for description method if all translations missing without exception', function () {
     expect(StatusWithoutTranslations::descriptions())->toBe([
         'Pending', // PENDING humanized
         'Accepted', // ACCEPTED humanized
         'Discarded', // DISCARDED humanized
-        'No Response' // NO_RESPONSE humanized
+        'No Response', // NO_RESPONSE humanized
     ])->not->toThrow(TranslationMissing::class);
 });
