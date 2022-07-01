@@ -32,7 +32,7 @@ trait LaravelEnumHelper
         }
 
         if (Str::of($translation)->startsWith(self::translateBaseUniquePath())) {
-            if($method === 'description'){
+            if($method === 'description') {
                 return self::humanize($this->name);
             }
             throw new TranslationMissing($this, $method);
