@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Datomatic\LaravelEnumHelper\Tests\Support\Enums\Status;
+use Datomatic\LaravelEnumHelper\Tests\Support\Enums\StatusFallbackLocale;
 use Datomatic\LaravelEnumHelper\Tests\Support\Enums\StatusInt;
 use Datomatic\LaravelEnumHelper\Tests\Support\Enums\StatusPascalCaseWithoutTranslation;
 use Datomatic\LaravelEnumHelper\Tests\Support\Enums\StatusString;
@@ -40,30 +41,36 @@ return [
         ],
     ],
     StatusInt::class => [
-        StatusInt::Pending() => 'Await decision',
-        StatusInt::Accepted() => 'Recognized valid',
-        StatusInt::Discarded() => 'No longer useful',
-        StatusInt::NoResponse() => 'No response',
+        StatusInt::pending() => 'Await decision',
+        StatusInt::accepted() => 'Recognized valid',
+        StatusInt::discarded() => 'No longer useful',
+        StatusInt::noResponse() => 'No response',
+    ],
+    StatusFallbackLocale::class => [
+        StatusFallbackLocale::pending() => 'FB Await decision',
+        StatusFallbackLocale::accepted() => 'FB Recognized valid',
+        StatusFallbackLocale::discarded() => 'FB No longer useful',
+        StatusFallbackLocale::noResponse() => 'FB No response',
     ],
     StatusPascalCaseWithoutTranslation::class => [
         'description' => [
-            StatusPascalCaseWithoutTranslation::Pending() => 'Await decision',
-            StatusPascalCaseWithoutTranslation::Accepted() => 'Recognized valid',
-            StatusPascalCaseWithoutTranslation::Discarded() => 'No longer useful',
+            StatusPascalCaseWithoutTranslation::pending() => 'Await decision',
+            StatusPascalCaseWithoutTranslation::accepted() => 'Recognized valid',
+            StatusPascalCaseWithoutTranslation::discarded() => 'No longer useful',
         ],
     ],
     StatusString::class => [
         'description' => [
-            StatusString::PENDING() => 'Await decision',
-            StatusString::ACCEPTED() => 'Recognized valid',
-            StatusString::DISCARDED() => 'No longer useful',
-            StatusString::NO_RESPONSE() => 'No response',
+            StatusString::pending() => 'Await decision',
+            StatusString::accepted() => 'Recognized valid',
+            StatusString::discarded() => 'No longer useful',
+            StatusString::noResponse() => 'No response',
         ],
         'excerpt' => [
-            StatusString::PENDING() => 'asdkj dskjdsa dkjsa ksjd sadask',
-            StatusString::ACCEPTED() => 'ls klsa dlksa dlksa salk salk',
-            StatusString::DISCARDED() => 'ksalsa ld djks jjdk skjd j',
-            StatusString::NO_RESPONSE() => 'as dklasd asldldlasd',
+            StatusString::pending() => 'asdkj dskjdsa dkjsa ksjd sadask',
+            StatusString::accepted() => 'ls klsa dlksa dlksa salk salk',
+            StatusString::discarded() => 'ksalsa ld djks jjdk skjd j',
+            StatusString::noResponse() => 'as dklasd asldldlasd',
         ],
     ],
 ];

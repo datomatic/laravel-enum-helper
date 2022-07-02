@@ -6,13 +6,13 @@ namespace Datomatic\LaravelEnumHelper;
 
 use Datomatic\EnumHelper\EnumHelper;
 use Datomatic\EnumHelper\Exceptions\UndefinedCase;
-use Datomatic\EnumHelper\Traits\EnumProperties;
+use Datomatic\EnumHelper\Traits\EnumDescription;
 use Datomatic\LaravelEnumHelper\Exceptions\TranslationMissing;
 use Illuminate\Support\Str;
 
 trait LaravelEnumHelper
 {
-    use EnumProperties;
+    use EnumDescription;
     use EnumHelper {
         __callStatic as callStatic;
     }
@@ -22,20 +22,28 @@ trait LaravelEnumHelper
      */
     public function __call(string $method, array $parameters): string
     {
-        $translateUniquePath = self::translateUniquePath($method, $this());
-
-        $translation = __($translateUniquePath, [], $parameters[0] ?? null);
-
-        if ($method === 'description'
-            && Str::of($translation)->startsWith($translateUniquePath)) {
-            $translation = __(self::translateUniqueFallbackPath($this()), [], $parameters[0] ?? null);
-        }
+        $translation = __(self::translateUniquePath($method, $this()), [], $parameters[0] ?? null);
 
         if (Str::of($translation)->startsWith(self::translateBaseUniquePath())) {
-            if ($method === 'description') {
+            throw new TranslationMissing($this, $method);
+        }
+
+        return $translation;
+    }
+
+    /**
+     * Description translation method with double fallback.
+     */
+    public function description(?string $lang = null): string
+    {
+        try {
+            $translation = $this->__call('description', [$lang]);
+        } catch (TranslationMissing) {
+            $translation = __(self::translateUniqueFallbackPath($this()), [], $lang);
+
+            if (Str::of($translation)->startsWith(self::translateBaseUniquePath())) {
                 return self::humanize($this->name);
             }
-            throw new TranslationMissing($this, $method);
         }
 
         return $translation;
@@ -81,10 +89,6 @@ trait LaravelEnumHelper
 
         if ($singularMethod = self::getSingularIfEndsWith($method, 'ByValue')) {
             return static::dynamicByKey('value', $singularMethod, ...$args);
-        }
-
-        if ($singularMethod = self::getSingularIfEndsWith($method, 'AsSelect')) {
-            return static::dynamicAsSelect($singularMethod, ...$args);
         }
 
         if ($singularMethod = Str::singular($method)) {

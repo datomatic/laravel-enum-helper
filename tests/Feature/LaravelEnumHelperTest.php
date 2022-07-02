@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Datomatic\LaravelEnumHelper\Exceptions\TranslationMissing;
 use Datomatic\LaravelEnumHelper\Tests\Support\Enums\Status;
+use Datomatic\LaravelEnumHelper\Tests\Support\Enums\StatusFallbackLocale;
 use Datomatic\LaravelEnumHelper\Tests\Support\Enums\StatusInt;
 use Datomatic\LaravelEnumHelper\Tests\Support\Enums\StatusPascalCase;
 use Datomatic\LaravelEnumHelper\Tests\Support\Enums\StatusPascalCaseWithoutTranslation;
@@ -43,8 +44,8 @@ it('can has correct translation text', function ($enum, $result) {
     expect($enum->description())->toBe($result);
 })->with([
     'translation' => [StatusString::NO_RESPONSE, 'No response'],
-    'fallback translation' => [Status::PENDING, 'Await decision'],
-    'method definition' => [StatusInt::NO_RESPONSE, 'No response'],
+    'fallback translation' => [StatusFallbackLocale::PENDING, 'FB Await decision'],
+    'method definition' => [StatusPascalCase::NoResponse, 'PC No response'],
 ]);
 
 it('has correct translation text passing lang', function ($enum, $lang, $result) {
@@ -54,11 +55,11 @@ it('has correct translation text passing lang', function ($enum, $lang, $result)
     'ita translation string backed enum' => [StatusString::NO_RESPONSE, 'it', 'Nessuna Risposta'],
     'eng translation int backed enum' => [StatusInt::PENDING, 'en', 'Await decision'],
     'ita translation int backed enum' => [StatusInt::NO_RESPONSE, 'it', 'Nessuna Risposta'],
-    'ita fallback locale translation' => [StatusPascalCase::NoResponse, 'it', 'No response'],
+    'ita fallback locale translation' => [StatusFallbackLocale::NO_RESPONSE, 'it', 'FB No response'],
     'eng fallback translation' => [Status::PENDING, 'en', 'Await decision'],
     'ita fallback translation' => [Status::PENDING, 'it', 'In attesa'],
-    'eng method' => [StatusPascalCase::Pending, 'en', 'Await decision'],
-    'ita method' => [StatusPascalCase::Pending, 'it', 'Await decision'],
+    'eng method' => [StatusPascalCase::Pending, 'en', 'PC Await decision'],
+    'ita method' => [StatusPascalCase::Pending, 'it', 'PC Await decision'],
 ]);
 
 it('can has correct translation with method name both singular and plural', function ($enum, $lang, $result) {
@@ -259,15 +260,27 @@ it('can return an associative array of translations [name => translations] with 
 it('can return an associative array of translations [value => translations] with params', function ($enumClass, $cases, $lang, $result) {
     expect($enumClass::descriptionsByValue($cases, $lang))->toBe($result);
 })->with([
-    'All string backed Enum cases into it ' => [StatusString::class, null, 'it', [
-        'P' => 'In attesa',
-        'A' => 'Accettato',
-        'D' => 'Rifiutato',
-        'N' => 'Nessuna Risposta',
+    'Pure Enum' => [Status::class, null, null, [
+        'PENDING' => 'Await decision',
+        'ACCEPTED' => 'Recognized valid',
+        'DISCARDED' => 'No longer useful',
+        'NO_RESPONSE' => 'No response',
     ]],
-    'Some string backed Enum cases into it ' => [StatusString::class, [StatusString::NO_RESPONSE, StatusString::NO_RESPONSE], 'it', [
-        'N' => 'Nessuna Risposta',
+    'Pure Enum subset' => [Status::class, [Status::PENDING, Status::DISCARDED], 'it', [
+        'PENDING' => 'In attesa',
+        'DISCARDED' => 'Rifiutato',
     ]],
+    'Backed Enum' => [StatusString::class, null, null, [
+        'P' => 'Await decision',
+        'A' => 'Recognized valid',
+        'D' => 'No longer useful',
+        'N' => 'No response',
+    ]],
+    'Backed Enum subset' => [StatusInt::class,
+        [StatusInt::DISCARDED, StatusInt::ACCEPTED], 'it', [
+            2 => 'Rifiutato',
+            1 => 'Accettato',
+        ], ],
 ]);
 
 it('can return an associative array of magic translations [value => translations] with method name both singular and plural', function ($enumClass, $cases, $lang, $result) {
@@ -339,34 +352,8 @@ it('can return an associative array of properties [value => translations] with e
     ]],
 ]);
 
-it('can return an associative array [value/name => translation]', function ($className, $cases, $lang, $values) {
-    expect($className::descriptionsAsSelect($cases, $lang))->toBe($values);
-})->with([
-    'Pure Enum' => [Status::class, null, null, [
-        'PENDING' => 'Await decision',
-        'ACCEPTED' => 'Recognized valid',
-        'DISCARDED' => 'No longer useful',
-        'NO_RESPONSE' => 'No response',
-    ]],
-    'Pure Enum subset' => [Status::class, [Status::PENDING, Status::DISCARDED], 'it', [
-        'PENDING' => 'In attesa',
-        'DISCARDED' => 'Rifiutato',
-    ]],
-    'Backed Enum' => [StatusString::class, null, null, [
-        'P' => 'Await decision',
-        'A' => 'Recognized valid',
-        'D' => 'No longer useful',
-        'N' => 'No response',
-    ]],
-    'Backed Enum subset' => [StatusString::class,
-        [StatusString::DISCARDED, StatusString::ACCEPTED], 'it', [
-            'D' => 'Rifiutato',
-            'A' => 'Accettato',
-        ], ],
-]);
-
 it('can return an associative array of magic translations [value/name => translations] with method name both singular and plural', function ($enumClass, $cases, $lang, $result) {
-    expect($enumClass::newsAsSelect($cases, $lang))->toBe($result);
+    expect($enumClass::newsByValue($cases, $lang))->toBe($result);
 })->with([
     'translations' => [Status::class, null, null, [
         'PENDING' => 'news PENDING',

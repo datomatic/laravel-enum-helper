@@ -27,10 +27,10 @@ enum StatusPascalCase
     public function description(?string $lang = null): string
     {
         return match ($this) {
-            self::Pending => 'Await decision',
-            self::Accepted => 'Recognized valid',
-            self::Discarded => 'No longer useful',
-            self::NoResponse => 'No response',
+            self::Pending => 'PC Await decision',
+            self::Accepted => 'PC Recognized valid',
+            self::Discarded => 'PC No longer useful',
+            self::NoResponse => 'PC No response',
         };
     }
 }
