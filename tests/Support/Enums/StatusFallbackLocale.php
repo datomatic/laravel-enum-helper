@@ -23,5 +23,4 @@ enum StatusFallbackLocale
     case DISCARDED;
 
     case NO_RESPONSE;
-
 }
