@@ -2,6 +2,16 @@
 
 All notable changes to `laravel-enum-helper` will be documented in this file.
 
+## v0.7.0 - 2022-07-02
+
+After migrating several projects with my fellow @RobertoNegro and listening to different opinions we have decided to simplify the package. From now on, I will consider a pure enum as a StringBackedEnum with names as values, so all ***AsSelect() methods will be replaced by ***ByValue() methods.
+
+- added definition of `description()`, `descriptions()`, `descriptionsByName()`, `descriptionsByValue()` to improve code completion and static analysis
+- removed all methods `***AsSelect()
+- removed `NotBackedEnum` exception
+- added support on `***ByValue()` methods also for pure enum using name instead value
+- merged version number with datomatic/enum-helper
+
 ## v0.4.5 - 2022-07-01
 
 - refactored `humanize` case string method
@@ -53,6 +63,7 @@ return [
             "P" => 'In attesa',
             "A" => 'Accettato',
     ...
+
 
 
 
