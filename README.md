@@ -28,6 +28,7 @@ If you are using [Laravel Nova](https://nova.laravel.com/) you can see the [Lara
 You should see the `datomatic/enum-helper` details on his [repository](https://github.com/datomatic/enum-helper), this is a summary:
 - **Invokable cases**: get the value of enum "invoking" it statically
 - **Construct enum by name or value**: `from()`, `tryFrom()`, `fromName()`, `tryFromName()` for all enums
+- **Enums Inspection**: `isPure()`, `isBacked()`, `has()`, `hasName()`, `hasValue()` methods
 - **Enums Equality**:  `is()`, `isNot()`, `in()`, `notIn()` methods
 - **Names**: methods to have a list of case names (`names()`, `namesByValue()`)
 - **Values**: methods to have a list of case values (`values()`, `valuesByName()`)

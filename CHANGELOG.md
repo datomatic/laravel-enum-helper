@@ -2,6 +2,11 @@
 
 All notable changes to `laravel-enum-helper` will be documented in this file.
 
+## v1.0.0 - 2022-09-09
+
+- v1.0.0 release 🚀  🎉
+- update requirements
+
 ## v0.7.0 - 2022-07-02
 
 After migrating several projects with my fellow @RobertoNegro and listening to different opinions we have decided to simplify the package. From now on, I will consider a pure enum as a StringBackedEnum with names as values, so all ***AsSelect() methods will be replaced by ***ByValue() methods.
@@ -63,6 +68,7 @@ return [
             "P" => 'In attesa',
             "A" => 'Accettato',
     ...
+
 
 
 
