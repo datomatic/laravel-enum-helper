@@ -22,7 +22,9 @@ and obtain `excerpt()`, `excerpts()`, `excerptsByName()`, `excerptsByValue()` me
 
 The package use the [Laravel `Pluralizer` component](https://laravel.com/docs/localization#pluralization-language) to get the singular method to call or to translate.
 
-If you are using [Laravel Nova](https://nova.laravel.com/) you can see the [Laravel Nova Enum Field](#laravel-nova-enum-field)
+## Related Packages
+- [datomatic/laravel-enum-collections](https://github.com/datomatic/laravel-enum-collections) if you need to save and interact many enum values on one field.
+- [datomatic/nova-enum-field](https://github.com/datomatic/nova-enum-field) if you are using [Laravel Nova](https://nova.laravel.com/), this package adds the PHP 8.1 `enum`, `EnumDescription` and `LaravelEnumHelper` traits support, with a Nova Select and Nova Boolean filters ready out of the box.
 
 ## The `enum-helper` base package summary
 You should see the `datomatic/enum-helper` details on his [repository](https://github.com/datomatic/enum-helper), this is a summary:
@@ -218,9 +220,3 @@ StatusString::descriptionsByValue(null, 'it'); // 🇮🇹 ['P' => 'In attesa','
 // Subset and language 
 Status::descriptionsByValue([StatusString::DISCARDED, StatusString::NO_RESPONSE], 'it'); // 🇮🇹 ['DISCARDED' => 'Rifiutato','NO_RESPONSE' => 'Nessuna Risposta',...
 ```
-
-## Laravel Nova Enum Field
-If you are using [Laravel Nova](https://nova.laravel.com/) Administrator Panel you can use a package to support the `enum-helper` or/and `laravel-enum-helper`.  
-This package adds the PHP 8.1 `enum`, `EnumDescription` and `LaravelEnumHelper` traits support to Nova, with a Nova Select and Nova Boolean filters ready out of the box.
-
-Package: [datomatic/nova-enum-field](https://github.com/datomatic/nova-enum-field)
