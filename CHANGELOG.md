@@ -2,6 +2,13 @@
 
 All notable changes to `laravel-enum-helper` will be documented in this file.
 
+## v2.0.0 - 2024-11-03
+
+- enum-helper v2 dependency
+- annotation generator command
+- refactoring
+- pint, larastan
+
 ## v1.1.1 - 2024-10-03
 
 - fix phpDoc
@@ -80,6 +87,7 @@ return [
             "P" => 'In attesa',
             "A" => 'Accettato',
     ...
+
 
 
 
