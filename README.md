@@ -92,6 +92,20 @@ enum StatusString
 ```
 After that you can define a custom "property" method like `color()` or `color(?string $lang = null)` or define the translations instead.
 
+## Annotation command
+A convenient command is available to generate DocBlock annotations for enum classes.
+
+```sh
+php artisan enum:annotate {class?} {--folder=}
+
+# Single enum
+php artisan enum:annotate Enums/FQN/ClassName
+# All enums in a folder
+php artisan enum:annotate --folder=Enums/Folder/Path
+```
+This command generate de annotation for [invokable case methods](https://github.com/datomatic/enum-helper?tab=readme-ov-file#invokable-cases).
+
+
 ## Translations
 
 Using this trait there is 2 way to manage translation strings.

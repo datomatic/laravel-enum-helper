@@ -36,7 +36,7 @@ class EnumAnnotateCommand extends Command
 
         $class = $this->argument('class');
         if (is_string($class)) {
-            return$this->annotateClass($class);
+            return $this->annotateClass($class);
         }
 
         return $this->annotateFolder();
@@ -87,6 +87,7 @@ class EnumAnnotateCommand extends Command
 
     /**
      * @param  ReflectionClass<UnitEnum>  $reflectionClass
+     *
      * @throws FileNotFoundException
      */
     protected function annotate(ReflectionClass $reflectionClass): void
@@ -171,7 +172,7 @@ class EnumAnnotateCommand extends Command
      * @return array<TagInterface>
      */
     protected function getDocblockTags(
-        DocBlockGenerator|null $originalDocblock,
+        ?DocBlockGenerator $originalDocblock,
         ReflectionClass $reflectionClass
     ): array {
         $constants = $reflectionClass->getConstants();

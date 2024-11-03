@@ -51,17 +51,17 @@ trait LaravelEnumHelper
 
     protected static function translateBaseUniquePath(): string
     {
-        return 'enums.' . static::class;
+        return 'enums.'.static::class;
     }
 
     protected static function translateUniquePath(string $method, string|int $value): string
     {
-        return self::translateBaseUniquePath() . '.' . $method . '.' . $value;
+        return self::translateBaseUniquePath().'.'.$method.'.'.$value;
     }
 
     protected static function translateUniqueFallbackPath(string|int $value): string
     {
-        return self::translateBaseUniquePath() . '.' . $value;
+        return self::translateBaseUniquePath().'.'.$value;
     }
 
     protected static function humanize(string $string): string

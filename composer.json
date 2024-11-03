@@ -22,18 +22,20 @@
     "require": {
         "php": "^8.1",
         "composer/class-map-generator": "^1.0",
-        "datomatic/enum-helper": "^1.0",
+        "datomatic/enum-helper": "^2.0",
         "illuminate/translation": "^8.0|^9.0|^10.0|^11.0",
         "illuminate/support": "^8.0|^9.0|^10.0|^11.0",
         "laminas/laminas-code": "^4.0",
         "jawira/case-converter": "^3.5"
     },
     "require-dev": {
-        "pestphp/pest": "^1.21|^2.34",
-        "orchestra/testbench": "^6.23|^7.0|^9.0",
+        "pestphp/pest": "^2.0|^3.0",
+        "orchestra/testbench": "^6.23|^7.0|^8.0|^9.0",
         "phpstan/phpstan": "^1.7",
         "friendsofphp/php-cs-fixer": "^3.8",
-        "pestphp/pest-plugin-laravel": "^1.2|^2.3"
+        "pestphp/pest-plugin-laravel": "^2.0|^3.0",
+        "laravel/pint": "^1.18",
+        "nunomaduro/larastan": "^2.9"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -43,16 +45,10 @@
         }
     },
     "scripts": {
-        "lint": "vendor/bin/php-cs-fixer fix -v",
-        "test:lint": "vendor/bin/php-cs-fixer fix -v --dry-run",
-        "test:types": "vendor/bin/phpstan analyse --ansi",
-        "test:unit": "vendor/bin/pest --colors=always",
-        "test": [
-            "@test:lint",
-            "@test:types",
-            "@test:unit"
-        ],
-        "coverage": "@test:unit --coverage"
+        "analyse": "vendor/bin/phpstan analyse",
+        "test": "vendor/bin/pest --bail",
+        "test-coverage": "vendor/bin/pest --coverage",
+        "format": "vendor/bin/pint"
     },
     "extra": {
         "laravel": {

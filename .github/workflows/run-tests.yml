@@ -10,25 +10,54 @@ on:
 
 jobs:
   pest:
-    name: Tests (Pest) L${{ matrix.laravel }}
+    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
-        laravel: [8, 9, '11']
-        php: [8.1, '8.2']
+        laravel: [8.*, 9.*, 10.*, 11.*]
+        php: [8.1, 8.2, 8.3]
         stability: [prefer-lowest, prefer-stable]
         exclude:
           - laravel: '11'
             php: 8.1
+        include:
+          - laravel: 9.*
+            testbench: 7.*
+            phpunit: 9.*
+          - laravel: 10.*
+            testbench: 8.*
+            phpunit: 10.*
+            carbon: ^2.63
+          - laravel: 11.*
+            testbench: 9.*
+            phpunit: 11.*
+            carbon: ^2.63
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Install composer dependencies
-        run: composer require "illuminate/support:^${{ matrix.laravel }}.0"
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
+          coverage: none
 
-      - name: Run tests
+      - name: Setup problem matchers
+        run: |
+          echo "::add-matcher::${{ runner.tool_cache }}/php.json"
+          echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+
+      - name: Install dependencies
+        run: |
+          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
+          composer update --${{ matrix.stability }} --prefer-dist --no-interaction
+
+      - name: Execute tests
         run: vendor/bin/pest
+        env:
+          DB_PORT: ${{ job.services.mysql.ports[3306] }}

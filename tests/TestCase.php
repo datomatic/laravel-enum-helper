@@ -9,12 +9,13 @@ use Orchestra\Testbench\TestCase as TestbenchTestCase;
 
 class TestCase extends TestbenchTestCase
 {
-    protected string $withoutDocBlockEnumsFolder = __DIR__ . '/Support/WithoutDocBlockEnums';
-    protected string $enumsFolder = __DIR__ . '/Support/Enums';
+    protected string $withoutDocBlockEnumsFolder = __DIR__.'/Support/WithoutDocBlockEnums';
+
+    protected string $enumsFolder = __DIR__.'/Support/Enums';
 
     protected function getEnvironmentSetUp($app)
     {
-        $app['path.lang'] = __DIR__ . '/lang';
+        $app['path.lang'] = __DIR__.'/lang';
     }
 
     protected function getPackageProviders($app): array
