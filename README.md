@@ -103,7 +103,7 @@ php artisan enum:annotate Enums/FQN/ClassName
 # All enums in a folder
 php artisan enum:annotate --folder=Enums/Folder/Path
 ```
-This command generate de annotation for [invokable case methods](https://github.com/datomatic/enum-helper?tab=readme-ov-file#invokable-cases).
+This command generate the phpDoc annotations for [invokable case methods](https://github.com/datomatic/enum-helper?tab=readme-ov-file#invokable-cases).
 
 
 ## Translations
