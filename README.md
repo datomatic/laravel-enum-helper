@@ -210,7 +210,7 @@ StatusString::colorsByName(); // ['PENDING' => '#000000','ACCEPTED' => '#0000FF'
 Status::descriptionsByName(); // ['PENDING' => 'Await decision', 'ACCEPTED' => 'Recognized valid',...
 // Subset
 StatusString::descriptionsByName([StatusString::DISCARDED, StatusString::ACCEPTED]); // ['DISCARDED' => 'No longer useful', 'ACCEPTED' => 'Recognized valid']
-Status::descriptionsByName([[Status::PENDING, Status::DISCARDED]); // ['PENDING' => 'Await decision', 'DISCARDED' => 'No longer useful']
+Status::descriptionsByName([Status::PENDING, Status::DISCARDED]); // ['PENDING' => 'Await decision', 'DISCARDED' => 'No longer useful']
 // Forcing language
 StatusString::descriptionsByName(null, 'it'); // 🇮🇹 ['P' => 'In attesa','A' => 'Accettato',...
 // Subset and language 
@@ -228,7 +228,7 @@ StatusString::colorsByValue(); // ['P' => '#000000','A' => '#0000FF',...
 // Subset
 Status::descriptionsByValue([Status::PENDING, Status::DISCARDED]); // ['PENDING' => 'Await decision', 'DISCARDED' => 'No longer useful']
 StatusString::descriptionsByValue([StatusString::DISCARDED, StatusString::ACCEPTED]); // ['D' => 'No longer useful', 'A' => 'Recognized valid']
-StatusString::colorsByValue([[Status::PENDING, Status::DISCARDED]); // ['P' => '#000000', 'D' => '#FF0000']
+StatusString::colorsByValue([Status::PENDING, Status::DISCARDED]); // ['P' => '#000000', 'D' => '#FF0000']
 // Forcing language
 StatusString::descriptionsByValue(null, 'it'); // 🇮🇹 ['P' => 'In attesa','A' => 'Accettato',...
 // Subset and language 
