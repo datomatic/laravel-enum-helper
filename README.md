@@ -99,7 +99,7 @@ A convenient command is available to generate DocBlock annotations for enum clas
 php artisan enum:annotate {class?} {--folder=}
 
 # Single enum
-php artisan enum:annotate Enums/FQN/ClassName
+php artisan enum:annotate "Enums\FQN\ClassName"
 # All enums in a folder
 php artisan enum:annotate --folder=Enums/Folder/Path
 ```
