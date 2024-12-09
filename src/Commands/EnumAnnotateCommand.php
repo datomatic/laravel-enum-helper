@@ -13,7 +13,7 @@ use Laminas\Code\Generator\DocBlock\Tag\MethodTag;
 use Laminas\Code\Generator\DocBlock\Tag\TagInterface;
 use Laminas\Code\Generator\DocBlockGenerator;
 use Laminas\Code\Reflection\DocBlockReflection;
-use ReflectionClass;
+use ReflectionEnum;
 use ReflectionException;
 use UnitEnum;
 
@@ -52,7 +52,7 @@ class EnumAnnotateCommand extends Command
 
         if (count($searchDirectoryMap) > 0) {
             foreach ($searchDirectoryMap as $class => $_) {
-                $reflection = new ReflectionClass($class);
+                $reflection = new ReflectionEnum($class);
 
                 if ($reflection->isSubclassOf(UnitEnum::class)) {
                     $this->annotate($reflection);
@@ -79,38 +79,38 @@ class EnumAnnotateCommand extends Command
             return self::FAILURE;
         }
 
-        $reflection = new ReflectionClass($className);
+        $reflection = new ReflectionEnum($className);
         $this->annotate($reflection);
 
         return self::SUCCESS;
     }
 
     /**
-     * @param  ReflectionClass<UnitEnum>  $reflectionClass
+     * @param  ReflectionEnum<UnitEnum>  $reflectionEnum
      *
      * @throws FileNotFoundException
      */
-    protected function annotate(ReflectionClass $reflectionClass): void
+    protected function annotate(ReflectionEnum $reflectionEnum): void
     {
         $docBlock = new DocBlockGenerator;
 
-        if ($reflectionClass->getDocComment()) {
+        if ($reflectionEnum->getDocComment()) {
             $docBlock->setShortDescription(
-                DocBlockGenerator::fromReflection(new DocBlockReflection($reflectionClass))
+                DocBlockGenerator::fromReflection(new DocBlockReflection($reflectionEnum))
                     ->getShortDescription()
             );
         }
 
-        $this->updateClassDocblock($reflectionClass, $this->getDocBlock($reflectionClass));
+        $this->updateClassDocblock($reflectionEnum, $this->getDocBlock($reflectionEnum));
     }
 
     /**
      * @throws FileNotFoundException
      */
-    protected function updateClassDocblock(ReflectionClass $reflectionClass, DocBlockGenerator $docBlock): void
+    protected function updateClassDocblock(ReflectionEnum $reflectionEnum, DocBlockGenerator $docBlock): void
     {
-        $shortName = $reflectionClass->getShortName();
-        $fileName = (string) $reflectionClass->getFileName();
+        $shortName = $reflectionEnum->getShortName();
+        $fileName = (string) $reflectionEnum->getFileName();
         $contents = $this->filesystem->get($fileName);
 
         $enumDeclaration = "enum {$shortName}";
@@ -139,16 +139,16 @@ class EnumAnnotateCommand extends Command
         }
     }
 
-    protected function getDocBlock(ReflectionClass $reflectionClass): DocBlockGenerator
+    protected function getDocBlock(ReflectionEnum $reflectionEnum): DocBlockGenerator
     {
         $docBlock = (new DocBlockGenerator)
             ->setWordWrap(false);
 
         $originalDocBlock = null;
 
-        if ($reflectionClass->getDocComment()) {
+        if ($reflectionEnum->getDocComment()) {
             $originalDocBlock = DocBlockGenerator::fromReflection(
-                new DocBlockReflection(ltrim($reflectionClass->getDocComment()))
+                new DocBlockReflection(ltrim($reflectionEnum->getDocComment()))
             );
 
             if ($originalDocBlock->getShortDescription()) {
@@ -162,7 +162,7 @@ class EnumAnnotateCommand extends Command
 
         $docBlock->setTags($this->getDocblockTags(
             $originalDocBlock,
-            $reflectionClass
+            $reflectionEnum
         ));
 
         return $docBlock;
@@ -173,15 +173,15 @@ class EnumAnnotateCommand extends Command
      */
     protected function getDocblockTags(
         ?DocBlockGenerator $originalDocblock,
-        ReflectionClass $reflectionClass
+        ReflectionEnum $reflectionEnum
     ): array {
-        $constants = $reflectionClass->getConstants();
+        $constants = $reflectionEnum->getConstants();
         $constantKeys = array_keys($constants);
 
         $tags = array_map(
             static fn (mixed $value, string $constantName): MethodTag => new MethodTag(
                 (new Convert($constantName))->toCamel(),
-                ['string'],
+                $reflectionEnum->getBackingType()?->getName() === 'int' ? ['int'] : ['string'],
                 null,
                 true
             ),

@@ -13,11 +13,21 @@ beforeEach(function () {
         __DIR__.'/../stubs/StatusWithoutDocBlock.stub',
         $this->withoutDocBlockEnumsFolder.'/StatusWithoutDocBlock.php'
     );
+    copy(
+        __DIR__.'/../stubs/StatusIntWithoutDocBlock.stub',
+        $this->withoutDocBlockEnumsFolder.'/StatusIntWithoutDocBlock.php'
+    );
+    copy(
+        __DIR__.'/../stubs/StatusStringWithoutDocBlock.stub',
+        $this->withoutDocBlockEnumsFolder.'/StatusStringWithoutDocBlock.php'
+    );
 });
 
 afterEach(function () {
     if (file_exists($this->withoutDocBlockEnumsFolder.'/StatusWithoutDocBlock.php')) {
         unlink($this->withoutDocBlockEnumsFolder.'/StatusWithoutDocBlock.php');
+        unlink($this->withoutDocBlockEnumsFolder.'/StatusIntWithoutDocBlock.php');
+        unlink($this->withoutDocBlockEnumsFolder.'/StatusStringWithoutDocBlock.php');
     }
     rmdir($this->withoutDocBlockEnumsFolder);
     rmdir(app_path('Enums'));
@@ -27,6 +37,27 @@ it('can be success single file', function () {
     $this->artisan("enum:annotate --folder={$this->withoutDocBlockEnumsFolder} Datomatic\\\\LaravelEnumHelper\\\\Tests\\\\Support\\\\WithoutDocBlockEnums\\\\StatusWithoutDocBlock")
         ->assertSuccessful();
     $contents = file_get_contents($this->withoutDocBlockEnumsFolder.'/StatusWithoutDocBlock.php');
+    $this->assertEquals(1, substr_count($contents, '@method static string pending()'));
+    $this->assertEquals(1, substr_count($contents, '@method static string accepted()'));
+    $this->assertEquals(1, substr_count($contents, '@method static string discarded()'));
+    $this->assertEquals(1, substr_count($contents, '@method static string noResponse()'));
+});
+
+
+it('can be success single file int backed enum', function () {
+    $this->artisan("enum:annotate --folder={$this->withoutDocBlockEnumsFolder} Datomatic\\\\LaravelEnumHelper\\\\Tests\\\\Support\\\\WithoutDocBlockEnums\\\\StatusIntWithoutDocBlock")
+        ->assertSuccessful();
+    $contents = file_get_contents($this->withoutDocBlockEnumsFolder.'/StatusIntWithoutDocBlock.php');
+    $this->assertEquals(1, substr_count($contents, '@method static int pending()'));
+    $this->assertEquals(1, substr_count($contents, '@method static int accepted()'));
+    $this->assertEquals(1, substr_count($contents, '@method static int discarded()'));
+    $this->assertEquals(1, substr_count($contents, '@method static int noResponse()'));
+});
+
+it('can be success single file stribng backed enum', function () {
+    $this->artisan("enum:annotate --folder={$this->withoutDocBlockEnumsFolder} Datomatic\\\\LaravelEnumHelper\\\\Tests\\\\Support\\\\WithoutDocBlockEnums\\\\StatusStringWithoutDocBlock")
+        ->assertSuccessful();
+    $contents = file_get_contents($this->withoutDocBlockEnumsFolder.'/StatusStringWithoutDocBlock.php');
     $this->assertEquals(1, substr_count($contents, '@method static string pending()'));
     $this->assertEquals(1, substr_count($contents, '@method static string accepted()'));
     $this->assertEquals(1, substr_count($contents, '@method static string discarded()'));
@@ -77,6 +108,8 @@ it('can be failed with without any argument or option with empty app enums folde
 
 it('can be failed with empty folder', function () {
     unlink($this->withoutDocBlockEnumsFolder.'/StatusWithoutDocBlock.php');
+    unlink($this->withoutDocBlockEnumsFolder.'/StatusIntWithoutDocBlock.php');
+    unlink($this->withoutDocBlockEnumsFolder.'/StatusStringWithoutDocBlock.php');
     $this->artisan("enum:annotate --folder={$this->withoutDocBlockEnumsFolder}")
         ->assertFailed();
 });

@@ -1,0 +1,18 @@
+<?php
+
+namespace Datomatic\LaravelEnumHelper\Tests\Support\WithoutDocBlockEnums;
+
+use Datomatic\LaravelEnumHelper\LaravelEnumHelper;
+
+enum StatusStringWithoutDocBlock: string
+{
+    use LaravelEnumHelper;
+
+    case PENDING = 'pending';
+
+    case ACCEPTED = 'accepted';
+
+    case DISCARDED = 'discarded';
+
+    case NO_RESPONSE = 'no_response';
+}

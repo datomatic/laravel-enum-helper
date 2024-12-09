@@ -1,0 +1,18 @@
+<?php
+
+namespace Datomatic\LaravelEnumHelper\Tests\Support\WithoutDocBlockEnums;
+
+use Datomatic\LaravelEnumHelper\LaravelEnumHelper;
+
+enum StatusIntWithoutDocBlock: int
+{
+    use LaravelEnumHelper;
+
+    case PENDING = 1;
+
+    case ACCEPTED = 2;
+
+    case DISCARDED = 3;
+
+    case NO_RESPONSE = 4;
+}
