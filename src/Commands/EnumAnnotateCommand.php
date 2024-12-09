@@ -139,7 +139,7 @@ class EnumAnnotateCommand extends Command
             }
 
             $this->filesystem->put($fileName, $contents);
-            $this->info("Wrote new phpDocBlock to {$fileName}.");
+            $this->info("Written new phpDocBlock to {$fileName}.");
         }
     }
 
