@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-enum-helper` will be documented in this file.
 
+## v2.0.2 - 2024-12-09
+
+- fixed error of annotation command with folder with not enum files
+
 ## v2.0.1 - 2024-12-09
 
 - fixed error of annotation command with string backed enum
@@ -91,6 +95,7 @@ return [
             "P" => 'In attesa',
             "A" => 'Accettato',
     ...
+
 
 
 
