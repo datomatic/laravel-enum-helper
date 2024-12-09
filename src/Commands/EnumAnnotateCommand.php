@@ -52,6 +52,10 @@ class EnumAnnotateCommand extends Command
 
         if (count($searchDirectoryMap) > 0) {
             foreach ($searchDirectoryMap as $class => $_) {
+                if(!enum_exists($class)){
+                    continue;
+                }
+
                 $reflection = new ReflectionEnum($class);
 
                 if ($reflection->isSubclassOf(UnitEnum::class)) {
