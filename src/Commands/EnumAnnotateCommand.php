@@ -84,7 +84,12 @@ class EnumAnnotateCommand extends Command
         }
 
         $reflection = new ReflectionEnum($className);
-        $this->annotate($reflection);
+        
+        if ($reflection->isSubclassOf(UnitEnum::class)) {
+            if (class_uses_recursive($class)['Datomatic\LaravelEnumHelper\LaravelEnumHelper'] ?? false) {
+                $this->annotate($reflection);
+            }
+        }
 
         return self::SUCCESS;
     }
