@@ -139,13 +139,13 @@ it('can return an array of translations with method name both singular and plura
     'translations with lang and cases param' => [Status::class, [Status::ACCEPTED, Status::NO_RESPONSE], 'it', ['ITA news ACCEPTED', 'ITA news NO_RESPONSE']],
 ]);
 
-//it('can\'t return an array of method results with method name both singular and plural', function ($enumClass, $cases, $lang) {
+// it('can\'t return an array of method results with method name both singular and plural', function ($enumClass, $cases, $lang) {
 //    expect(fn() => $enumClass::news($cases, $lang))->toRuntimeError();
-//})->with([
+// })->with([
 //    'enum with method' => [StatusString::class, null, null],
 //    'enum with method with cases param' => [StatusString::class, [StatusString::DISCARDED, StatusString::ACCEPTED], null],
 //    'enum with method with lang and cases param' => [StatusString::class, [StatusString::NO_RESPONSE, StatusString::ACCEPTED], 'it'],
-//]);
+// ]);
 
 it('can return an array of translations with magic method', function ($enumClass, $cases, $lang, $result) {
     expect($enumClass::excerpts($cases, $lang))->toBe($result);

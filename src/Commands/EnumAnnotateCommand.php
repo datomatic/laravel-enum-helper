@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Datomatic\LaravelEnumHelper\Commands;
 
 use Composer\ClassMapGenerator\ClassMapGenerator;
+use Datomatic\LaravelEnumHelper\LaravelEnumHelper;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Filesystem\Filesystem;
@@ -52,13 +53,13 @@ class EnumAnnotateCommand extends Command
 
         if (count($searchDirectoryMap) > 0) {
             foreach ($searchDirectoryMap as $class => $_) {
-                if(!enum_exists($class)){
+                if (! enum_exists($class)) {
                     continue;
                 }
 
                 $reflection = new ReflectionEnum($class);
 
-                if ($reflection->isSubclassOf(UnitEnum::class)) {
+                if ($reflection->isSubclassOf(UnitEnum::class) && $this->usesEnumHelperTrait($class)) {
                     $this->annotate($reflection);
                 }
             }
@@ -69,6 +70,11 @@ class EnumAnnotateCommand extends Command
         $this->warn("Please create enum within '{$searchDirectory}'");
 
         return self::FAILURE;
+    }
+
+    protected function usesEnumHelperTrait(string $className): bool
+    {
+        return in_array(LaravelEnumHelper::class, class_uses_recursive($className));
     }
 
     /**
@@ -84,9 +90,9 @@ class EnumAnnotateCommand extends Command
         }
 
         $reflection = new ReflectionEnum($className);
-        
+
         if ($reflection->isSubclassOf(UnitEnum::class)) {
-            if (class_uses_recursive($class)['Datomatic\LaravelEnumHelper\LaravelEnumHelper'] ?? false) {
+            if ($this->usesEnumHelperTrait($className)) {
                 $this->annotate($reflection);
             }
         }
