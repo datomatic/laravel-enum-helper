@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Datomatic\LaravelEnumHelper\Tests\Support\Enums\DoesntUseEnumHelperTrait;
+
 beforeEach(function () {
     if (! file_exists(app_path('Enums'))) {
         mkdir(app_path('Enums'), 0755, true);
@@ -42,7 +44,6 @@ it('can be success single file', function () {
     $this->assertEquals(1, substr_count($contents, '@method static string discarded()'));
     $this->assertEquals(1, substr_count($contents, '@method static string noResponse()'));
 });
-
 
 it('can be success single file int backed enum', function () {
     $this->artisan("enum:annotate --folder={$this->withoutDocBlockEnumsFolder} Datomatic\\\\LaravelEnumHelper\\\\Tests\\\\Support\\\\WithoutDocBlockEnums\\\\StatusIntWithoutDocBlock")
@@ -94,6 +95,13 @@ it('can be success whole folder', function () {
     $this->assertEquals(1, substr_count($contents, '@method static string accepted()'));
     $this->assertEquals(1, substr_count($contents, '@method static string discarded()'));
     $this->assertEquals(1, substr_count($contents, '@method static string noResponse()'));
+});
+
+it('doesnt annotate enums that dont use LaravelEnumTrait', function () {
+    $this->artisan('enum:annotate Datomatic\\\\LaravelEnumHelper\\\\Tests\\\\Support\\\\Enums\\\\DoesntUseEnumHelperTrait')
+        ->assertSuccessful();
+    $e = new ReflectionEnum(DoesntUseEnumHelperTrait::class);
+    $this->assertEquals(false, $e->getDocComment());
 });
 
 it('can be failed with class', function () {
