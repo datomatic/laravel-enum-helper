@@ -7,3 +7,4 @@ vendor/
 .idea/
 coverage/
 node_modules
+/.phpunit.cache/test-results

@@ -35,17 +35,17 @@ beforeEach(function () {
 
 /**
  * @param  \Datomatic\LaravelEnumHelper\Tests\TestCase|\PHPUnit\Framework\TestCase  $this
- * @return void
  */
 function unlinkAllPhpFiles(string $folder): void
 {
-    try{
+    try {
         unlink($folder.'/DoesntUseEnumHelperTrait.php');
         unlink($folder.'/StatusWithoutDocBlock.php');
         unlink($folder.'/StatusIntWithoutDocBlock.php');
         unlink($folder.'/StatusStringWithoutDocBlock.php');
         unlink($folder.'/StatusWithoutMethodTagDocBlock.php');
-    }catch (\Exception){};
+    } catch (\Exception) {
+    }
 }
 
 afterEach(function () {

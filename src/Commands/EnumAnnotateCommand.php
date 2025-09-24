@@ -56,10 +56,7 @@ class EnumAnnotateCommand extends Command
                 }
 
                 $reflection = new ReflectionEnum($class);
-
-                if ($reflection->isSubclassOf(UnitEnum::class) && $this->usesEnumHelperTrait($class)) {
-                    $this->annotate($reflection);
-                }
+                $this->annotate($reflection);
             }
 
             return self::SUCCESS;
@@ -88,10 +85,7 @@ class EnumAnnotateCommand extends Command
         }
 
         $reflection = new ReflectionEnum($className);
-
-        if ($reflection->isSubclassOf(UnitEnum::class) && $this->usesEnumHelperTrait($className)) {
-            $this->annotate($reflection);
-        }
+        $this->annotate($reflection);
 
         return self::SUCCESS;
     }
@@ -103,6 +97,12 @@ class EnumAnnotateCommand extends Command
      */
     protected function annotate(ReflectionEnum $reflectionEnum): void
     {
+
+        if (! $reflectionEnum->isSubclassOf(UnitEnum::class) || ! $this->usesEnumHelperTrait($reflectionEnum->getName())) {
+            return;
+        }
+
+        /** @var ReflectionEnum<UnitEnum> $reflectionEnum */
         $docBlock = new DocBlockGenerator;
 
         if ($reflectionEnum->getDocComment()) {
@@ -116,6 +116,8 @@ class EnumAnnotateCommand extends Command
     }
 
     /**
+     * @param  ReflectionEnum<UnitEnum>  $reflectionEnum
+     *
      * @throws FileNotFoundException
      */
     protected function updateClassDocblock(ReflectionEnum $reflectionEnum, DocBlockGenerator $docBlock): void
@@ -150,6 +152,9 @@ class EnumAnnotateCommand extends Command
         }
     }
 
+    /**
+     * @param  ReflectionEnum<UnitEnum>  $reflectionEnum
+     */
     protected function getDocBlock(ReflectionEnum $reflectionEnum): DocBlockGenerator
     {
         $docBlock = (new DocBlockGenerator)
@@ -180,6 +185,9 @@ class EnumAnnotateCommand extends Command
     }
 
     /**
+     * @template T of \BackedEnum|\UnitEnum
+     *
+     * @param  \ReflectionEnum<T>  $reflectionEnum
      * @return array<TagInterface>
      */
     protected function getDocblockTags(

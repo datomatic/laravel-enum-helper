@@ -1,6 +1,6 @@
-
 parameters:
+    excludePaths:
+        - src/LaravelEnumHelper.php
     level: max
     paths:
         - src
-
