@@ -35,7 +35,7 @@
         "friendsofphp/php-cs-fixer": "^3.8",
         "pestphp/pest-plugin-laravel": "^1.0|^2.0|^3.0",
         "laravel/pint": "^1.18",
-        "nunomaduro/larastan": "^2.0"
+        "nunomaduro/larastan": "^2.0|^3.0"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
