@@ -23,14 +23,34 @@ beforeEach(function () {
         __DIR__.'/../stubs/StatusStringWithoutDocBlock.stub',
         $this->withoutDocBlockEnumsFolder.'/StatusStringWithoutDocBlock.php'
     );
+    copy(
+        __DIR__.'/../stubs/DoesntUseEnumHelperTrait.stub',
+        $this->withoutDocBlockEnumsFolder.'/DoesntUseEnumHelperTrait.php'
+    );
+    copy(
+        __DIR__.'/../stubs/StatusWithoutMethodTagDocBlock.stub',
+        $this->withoutDocBlockEnumsFolder.'/StatusWithoutMethodTagDocBlock.php'
+    );
 });
 
+/**
+ * @param  \Datomatic\LaravelEnumHelper\Tests\TestCase|\PHPUnit\Framework\TestCase  $this
+ * @return void
+ */
+function unlinkAllPhpFiles(string $folder): void
+{
+    try{
+        unlink($folder.'/DoesntUseEnumHelperTrait.php');
+        unlink($folder.'/StatusWithoutDocBlock.php');
+        unlink($folder.'/StatusIntWithoutDocBlock.php');
+        unlink($folder.'/StatusStringWithoutDocBlock.php');
+        unlink($folder.'/StatusWithoutMethodTagDocBlock.php');
+    }catch (\Exception){};
+}
+
 afterEach(function () {
-    if (file_exists($this->withoutDocBlockEnumsFolder.'/StatusWithoutDocBlock.php')) {
-        unlink($this->withoutDocBlockEnumsFolder.'/StatusWithoutDocBlock.php');
-        unlink($this->withoutDocBlockEnumsFolder.'/StatusIntWithoutDocBlock.php');
-        unlink($this->withoutDocBlockEnumsFolder.'/StatusStringWithoutDocBlock.php');
-    }
+    unlinkAllPhpFiles($this->withoutDocBlockEnumsFolder);
+
     rmdir($this->withoutDocBlockEnumsFolder);
     rmdir(app_path('Enums'));
 });
@@ -97,7 +117,7 @@ it('can be success whole folder', function () {
     $this->assertEquals(1, substr_count($contents, '@method static string noResponse()'));
 });
 
-it('doesnt annotate enums that dont use LaravelEnumTrait', function () {
+it('doesnt annotate enums that don\'t use LaravelEnumTrait', function () {
     $this->artisan('enum:annotate Datomatic\\\\LaravelEnumHelper\\\\Tests\\\\Support\\\\Enums\\\\DoesntUseEnumHelperTrait')
         ->assertSuccessful();
     $e = new ReflectionEnum(DoesntUseEnumHelperTrait::class);
@@ -115,9 +135,6 @@ it('can be failed with without any argument or option with empty app enums folde
 });
 
 it('can be failed with empty folder', function () {
-    unlink($this->withoutDocBlockEnumsFolder.'/StatusWithoutDocBlock.php');
-    unlink($this->withoutDocBlockEnumsFolder.'/StatusIntWithoutDocBlock.php');
-    unlink($this->withoutDocBlockEnumsFolder.'/StatusStringWithoutDocBlock.php');
-    $this->artisan("enum:annotate --folder={$this->withoutDocBlockEnumsFolder}")
-        ->assertFailed();
+    unlinkAllPhpFiles($this->withoutDocBlockEnumsFolder);
+    $this->artisan("enum:annotate --folder={$this->withoutDocBlockEnumsFolder}")->assertFailed();
 });

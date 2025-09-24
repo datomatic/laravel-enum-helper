@@ -20,9 +20,7 @@ use UnitEnum;
 
 class EnumAnnotateCommand extends Command
 {
-    protected $signature = 'enum:annotate
-                            {class?}
-                            {--folder=}';
+    protected $signature = 'enum:annotate {class?} {--folder=}';
 
     protected $description = 'Generate DocBlock annotations for enum classes';
 
@@ -91,10 +89,8 @@ class EnumAnnotateCommand extends Command
 
         $reflection = new ReflectionEnum($className);
 
-        if ($reflection->isSubclassOf(UnitEnum::class)) {
-            if ($this->usesEnumHelperTrait($className)) {
-                $this->annotate($reflection);
-            }
+        if ($reflection->isSubclassOf(UnitEnum::class) && $this->usesEnumHelperTrait($className)) {
+            $this->annotate($reflection);
         }
 
         return self::SUCCESS;
