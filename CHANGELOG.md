@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-enum-helper` will be documented in this file.
 
+## v2.1.3 - 2026-03-17
+
+Laravel 13 support
+
 ## v2.1.2 - 2025-09-24
 
 - fix annotations by @Carnicero90
@@ -107,6 +111,7 @@ return [
             "P" => 'In attesa',
             "A" => 'Accettato',
     ...
+
 
 
 
