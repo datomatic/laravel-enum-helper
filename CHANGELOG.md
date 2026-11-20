@@ -2,6 +2,12 @@
 
 All notable changes to `laravel-enum-helper` will be documented in this file.
 
+## v2.2.0 - 2026-11-20
+
+Adds PHP 8.6 support (CI now runs on PHP 8.6).
+
+**Full Changelog**: https://github.com/datomatic/laravel-enum-helper/compare/v2.1.4...v2.2.0
+
 ## v2.1.4 - 2026-03-17
 
 Laravel 13 support
@@ -115,6 +121,7 @@ return [
             "P" => 'In attesa',
             "A" => 'Accettato',
     ...
+
 
 
 
